@@ -1,0 +1,1441 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Computing Award Night Voting</title>
+    <link href="img/welsu.png" rel="icon">
+    <style>
+        /* Reset some default styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #3498db;
+            --secondary-color: #2ecc71;
+            --accent-color: #e74c3c;
+            --background-color: #f9f9f9;
+            --card-color: #ffffff;
+            --text-color: #333333;
+            --paid-category-color: #f39c12;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f5f5f5;
+        }
+        
+        /* Header styles */
+        .header {
+            background: linear-gradient(135deg, #1a2a6c,  #0a183c, #000000);
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .header::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><path d="M50 0 L100 50 L50 100 L0 50 Z" fill="rgba(255,255,255,0.05)"/></svg>') repeat;
+            opacity: 0.3;
+        }
+        
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .header-title {
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+            font-weight: 800;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            letter-spacing: 1px;
+        }
+        
+        .header-subtitle {
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+            font-weight: 300;
+            opacity: 0.9;
+        }
+        
+        .award-icon {
+            display: inline-block;
+            margin: 0 0.5rem;
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        /* Countdown styles */
+        .countdown-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 1.5rem;
+            flex-wrap: wrap;
+        }
+        
+        .countdown-item {
+            margin: 0 0.8rem;
+            min-width: 80px;
+        }
+        
+        .countdown-value {
+            font-size: 2rem;
+            font-weight: 700;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+            padding: 0.5rem 0;
+            margin-bottom: 0.3rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(5px);
+            min-width: 70px;
+            display: inline-block;
+        }
+        
+        .countdown-label {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            opacity: 0.9;
+        }
+        
+        .countdown-title {
+            font-size: 1.2rem;
+            margin-bottom: 0.8rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+        }
+        
+        /* Responsive styles */
+        @media (max-width: 768px) {
+            .header-title {
+                font-size: 2.2rem;
+            }
+            
+            .header-subtitle {
+                font-size: 1rem;
+            }
+            
+            .countdown-item {
+                margin: 0 0.5rem;
+                min-width: 60px;
+            }
+            
+            .countdown-value {
+                font-size: 1.5rem;
+                min-width: 50px;
+            }
+            
+            .countdown-label {
+                font-size: 0.7rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .header-title {
+                font-size: 1.8rem;
+            }
+            
+            .countdown-container {
+                margin-top: 1rem;
+            }
+            
+            .countdown-item {
+                margin: 0 0.3rem;
+                min-width: 50px;
+            }
+            
+            .countdown-value {
+                font-size: 1.2rem;
+                padding: 0.4rem 0;
+                min-width: 40px;
+            }
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.8;
+        }
+
+        .progress-container {
+            margin: 20px 0;
+        }
+
+        .progress-bar {
+            height: 10px;
+            background-color: #e0e0e0;
+            border-radius: 5px;
+            overflow: hidden;
+            margin-top: 10px;
+        }
+
+        .progress {
+            height: 100%;
+            background-color: var(--secondary-color);
+            width: 0%;
+            transition: width 0.5s ease;
+        }
+
+        .category-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .category {
+            background-color: var(--card-color);
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            flex: 1 1 100%;
+            transition: transform 0.3s ease;
+        }
+
+        @media (min-width: 768px) {
+            .category {
+                flex: 1 1 calc(50% - 20px);
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .category {
+                flex: 1 1 calc(33.33% - 20px);
+            }
+        }
+
+        .category:hover {
+            transform: translateY(-5px);
+        }
+
+        .category h2 {
+            margin-bottom: 15px;
+            color: var(--primary-color);
+            border-bottom: 2px solid var(--primary-color);
+            padding-bottom: 10px;
+        }
+
+        .paid-category h2 {
+            color: #0a183c;
+            border-bottom: 2px solid #0a183c;
+        }
+
+        .paid-badge {
+            display: inline-block;
+            background-color: #0a183c;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 0.8rem;
+            margin-left: 10px;
+        }
+
+        .nominees {
+            list-style-type: none;
+        }
+
+        .nominee {
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            border: 1px solid #e0e0e0;
+            transition: all 0.3s ease;
+        }
+
+        .nominee:hover {
+            background-color: rgba(52, 152, 219, 0.1);
+            border-color: var(--primary-color);
+        }
+
+        .nominee label {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        .nominee input[type="radio"] {
+            margin-right: 10px;
+        }
+
+        .nominee-info {
+            display: flex;
+            align-items: center;
+            flex: 1;
+        }
+
+        .nominee-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-right: 15px;
+        }
+
+        .nominee-name {
+            font-weight: bold;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        .form-group input[type="text"],
+        .form-group input[type="email"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #e0e0e0;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+
+        .submit-container {
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        .btn {
+            padding: 12px 24px;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn:hover {
+            background-color: #2980b9;
+        }
+
+        .btn-submit {
+            background-color: var(--secondary-color);
+        }
+
+        .btn-submit:hover {
+            background-color: #27ae60;
+        }
+
+        .google-form {
+            margin-top: 20px;
+            border: 1px solid #e0e0e0;
+            border-radius: 10px;
+            overflow: hidden;
+            height: 300px;
+        }
+
+        .google-form iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background-color: var(--card-color);
+            padding: 20px;
+            border-radius: 10px;
+            max-width: 500px;
+            width: 90%;
+            text-align: center;
+        }
+
+        .modal-header {
+            margin-bottom: 20px;
+        }
+
+        .modal-body {
+            margin-bottom: 20px;
+        }
+
+        .modal-footer {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .validation-error {
+            color: var(--accent-color);
+            font-size: 0.9rem;
+            margin-top: 5px;
+            display: none;
+        }
+
+        .tooltip {
+            position: relative;
+            display: inline-block;
+            margin-left: 5px;
+            cursor: help;
+        }
+
+        .tooltip-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 20px;
+            height: 20px;
+            background-color: var(--primary-color);
+            color: white;
+            border-radius: 50%;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .tooltip-text {
+            visibility: hidden;
+            width: 200px;
+            background-color: #555;
+            color: #fff;
+            text-align: center;
+            border-radius: 6px;
+            padding: 5px;
+            position: absolute;
+            z-index: 1;
+            bottom: 125%;
+            left: 50%;
+            margin-left: -100px;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .tooltip:hover .tooltip-text {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        .toast {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: var(--secondary-color);
+            color: white;
+            padding: 15px 20px;
+            border-radius: 5px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transform: translateY(100px);
+            opacity: 0;
+            transition: all 0.5s ease;
+        }
+
+        .toast.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .toast.error {
+            background-color: var(--accent-color);
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-container">
+            <h1 class="header-title">
+                <span class="award-icon">🏆</span>
+                Award Night
+                <span class="award-icon">🏆</span>
+            </h1>
+            <p class="header-subtitle">Cast your vote for this year's Department of Computing Award Night</p>
+            
+            <div class="countdown-wrapper">
+                <p class="countdown-title">Event Begins In</p>
+                <div class="countdown-container">
+                    <div class="countdown-item">
+                        <div id="days" class="countdown-value">00</div>
+                        <div class="countdown-label">Days</div>
+                    </div>
+                    <div class="countdown-item">
+                        <div id="hours" class="countdown-value">00</div>
+                        <div class="countdown-label">Hours</div>
+                    </div>
+                    <div class="countdown-item">
+                        <div id="minutes" class="countdown-value">00</div>
+                        <div class="countdown-label">Minutes</div>
+                    </div>
+                    <div class="countdown-item">
+                        <div id="seconds" class="countdown-value">00</div>
+                        <div class="countdown-label">Seconds</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        
+    </header>
+
+    <div class="container">
+        <div class="progress-container">
+            <div class="progress-details">
+                <span id="progress-text">0% Complete</span>
+                <span id="categories-completed">0/6 Categories</span>
+            </div>
+            <div class="progress-bar">
+                <div class="progress" id="progress"></div>
+            </div>
+        </div>
+
+        <form id="voting-form">
+       
+
+            <div class="category-container">
+                <!-- Most Handsome Category -->
+                <div class="category paid-category" data-category="most-handsome" data-paid="true">
+                    <h2>Most Handsome <span class="paid-badge">₦100 per vote</span></h2>
+                    <ul class="nominees">
+                        <li class="nominee">
+                            <label>
+                                <input type="radio" name="most-handsome" value="Sontonye Green" data-paystack-link="https://paystack.com/pay/Green-handsome">
+                                <div class="nominee-info">
+                                    <img src="/api/placeholder/50/50" alt="Sotonye Green" class="nominee-avatar">
+                                    <span class="nominee-name">Sotonye Green</span>
+                                </div>
+                            </label>
+                        </li>
+                        <li class="nominee">
+                            <label>
+                                <input type="radio" name="most-handsome" value="Etinosa Frank" data-paystack-link="https://paystack.com/pay/etinosa-frank">
+                                <div class="nominee-info">
+                                    <img src="/api/placeholder/50/50" alt="Etinosa Frank" class="nominee-avatar">
+                                    <span class="nominee-name">Etinosa Frank</span>
+                                </div>
+                            </label>
+                        </li>
+                        <li class="nominee">
+                            <label>
+                                <input type="radio" name="most-handsome" value="Nelson" data-paystack-link="https://paystack.com/pay/nelson-csc">
+                                <div class="nominee-info">
+                                    <img src="/api/placeholder/50/50" alt="Nelson" class="nominee-avatar">
+                                    <span class="nominee-name">Nelson</span>
+                                </div>
+                            </label>
+                        </li>
+                        <li class="nominee">
+                            <label>
+                                <input type="radio" name="most-handsome" value="Funsho" data-paystack-link="https://paystack.com/pay/funsho-csc">
+                                <div class="nominee-info">
+                                    <img src="/api/placeholder/50/50" alt="Funsho" class="nominee-avatar">
+                                    <span class="nominee-name">Funsho</span>
+                                </div>
+                            </label>
+                        </li>
+                        <li class="nominee">
+                            <label>
+                                <input type="radio" name="most-handsome" value="AbdulMalik" data-paystack-link="https://paystack.com/pay/abdul-malik">
+                                <div class="nominee-info">
+                                    <img src="/api/placeholder/50/50" alt="Uyioghosa" class="nominee-avatar">
+                                    <span class="nominee-name">AbdulMalik</span>
+                                </div>
+                            </label>
+                        </li>
+                        <li class="nominee">
+                            <label>
+                                <input type="radio" name="most-handsome" value="Uyioghosa" data-paystack-link="https://paystack.com/pay/uyioghosa">
+                                <div class="nominee-info">
+                                    <img src="/api/placeholder/50/50" alt="Uyioghosa" class="nominee-avatar">
+                                    <span class="nominee-name">Uyioghosa</span>
+                                </div>
+                            </label>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Freshest Fresher Category -->
+                <div class="category paid-category" data-category="freshest-fresher" data-paid="true">
+                    <h2>Freshest Fresher <span class="paid-badge">₦100 per vote</span></h2>
+                    <ul class="nominees">
+                        <li class="nominee">
+                            <label>
+                                <input type="radio" name="freshest-fresher" value="*****">
+                                <div class="nominee-info">
+                                    <img src="/api/placeholder/50/50" alt="*****" class="nominee-avatar">
+                                    <span class="nominee-name">*******</span>
+                                </div>
+                            </label>
+                        </li>
+                        <li class="nominee">
+                            <label>
+                                <input type="radio" name="freshest-fresher" value="******">
+                                <div class="nominee-info">
+                                    <img src="/api/placeholder/50/50" alt="*****" class="nominee-avatar">
+                                    <span class="nominee-name">******</span>
+                                </div>
+                            </label>
+                        </li>
+                        <li class="nominee">
+                            <label>
+                                <input type="radio" name="freshest-fresher" value="******">
+                                <div class="nominee-info">
+                                    <img src="/api/placeholder/50/50" alt="******" class="nominee-avatar">
+                                    <span class="nominee-name">*******</span>
+                                </div>
+                            </label>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Best Dressed Category - Male(Paid) -->
+                <div class="category paid-category" data-category="best-dressed" data-paid="true">
+                    <h2>Best Dressed Male <span class="paid-badge">₦100 per vote</span></h2>
+                    <ul class="nominees">
+                        <li class="nominee">
+                            <label>
+                                <input type="radio" name="best-dressed" value="Sennuga Oluwatosin" data-paystack-link="https://paystack.com/pay/sennuga">
+                                <div class="nominee-info">
+                                    <img src="/api/placeholder/50/50" alt="Sennuga Oluwatosin" class="nominee-avatar">
+                                    <span class="nominee-name">Sennuga Oluwatosin</span>
+                                </div>
+                            </label>
+                        </li>
+                        <li class="nominee">
+                            <label>
+                                <input type="radio" name="best-dressed" value="AbdulMalik" data-paystack-link="https://paystack.com/pay/malik-dress">
+                                <div class="nominee-info">
+                                    <img src="/api/placeholder/50/50" alt="AbdulMalik" class="nominee-avatar">
+                                    <span class="nominee-name">AbdulMalik</span>
+                                </div>
+                            </label>
+                        </li>
+                        <li class="nominee">
+                            <label>
+                                <input type="radio" name="best-dressed" value="Samuel" data-paystack-link="https://paystack.com/pay/samuel-dress">
+                                <div class="nominee-info">
+                                    <img src="/api/placeholder/50/50" alt="Samuel" class="nominee-avatar">
+                                    <span class="nominee-name">Samuel </span>
+                                </div>
+                            </label>
+                        </li>
+                        <li class="nominee">
+                            <label>
+                                <input type="radio" name="best-dressed" value="Etinosa Frank" data-paystack-link="https://paystack.com/pay/osayogie-frank">
+                                <div class="nominee-info">
+                                    <img src="/api/placeholder/50/50" alt="Etinosa Frank" class="nominee-avatar">
+                                    <span class="nominee-name">Etinosa Frank</span>
+                                </div>
+                            </label>
+                        </li>
+                        <li class="nominee">
+                            <label>
+                                <input type="radio" name="best-dressed" value="Omare Esere" data-paystack-link="https://paystack.com/pay/omare-esere">
+                                <div class="nominee-info">
+                                    <img src="/api/placeholder/50/50" alt="Omare Esere" class="nominee-avatar">
+                                    <span class="nominee-name">Omare Esere</span>
+                                </div>
+                            </label>
+                        </li>
+                        <li class="nominee">
+                            <label>
+                                <input type="radio" name="best-dressed" value="Hassan Bello" data-paystack-link="https://paystack.com/pay/hassan-bello">
+                                <div class="nominee-info">
+                                    <img src="/api/placeholder/50/50" alt="Hassan Bello" class="nominee-avatar">
+                                    <span class="nominee-name">Hassan Bello</span>
+                                </div>
+                            </label>
+                        </li>
+                        <li class="nominee">
+                            <label>
+                                <input type="radio" name="best-dressed" value="Funsho" data-paystack-link="https://paystack.com/pay/funsho-dress">
+                                <div class="nominee-info">
+                                    <img src="/api/placeholder/50/50" alt="Funsho" class="nominee-avatar">
+                                    <span class="nominee-name">Funsho</span>
+                                </div>
+                            </label>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Best Dressed Category - Female(Paid) -->
+                <div class="category paid-category" data-category="best-dressed-female" data-paid="true">
+                    <h2>Best Dressed Female <span class="paid-badge">₦100 per vote</span></h2>
+                    <ul class="nominees">
+                        <li class="nominee">
+                            <label>
+                                <input type="radio" name="best-dressed-female" value="Courtney" data-paystack-link="https://paystack.com/pay/courtney">
+                                <div class="nominee-info">
+                                    <img src="/api/placeholder/50/50" alt="Courtney" class="nominee-avatar">
+                                    <span class="nominee-name">Courtney</span>
+                                </div>
+                            </label>
+                        </li>
+                        <li class="nominee">
+                            <label>
+                                <input type="radio" name="best-dressed-female" value="Maya" data-paystack-link="https://paystack.com/pay/maya-dress">
+                                <div class="nominee-info">
+                                    <img src="/api/placeholder/50/50" alt="Maya" class="nominee-avatar">
+                                    <span class="nominee-name">Maya</span>
+                                </div>
+                            </label>
+                        </li>
+                        <li class="nominee">
+                            <label>
+                                <input type="radio" name="best-dressed-female" value="Francess" data-paystack-link="https://paystack.com/pay/francess-dress">
+                                <div class="nominee-info">
+                                    <img src="/api/placeholder/50/50" alt="Francess" class="nominee-avatar">
+                                    <span class="nominee-name">Francess</span>
+                                </div>
+                            </label>
+                        </li>
+                        <li class="nominee">
+                            <label>
+                                <input type="radio" name="best-dressed-female" value="Joy" data-paystack-link="https://paystack.com/pay/joy-dress">
+                                <div class="nominee-info">
+                                    <img src="/api/placeholder/50/50" alt="Joy" class="nominee-avatar">
+                                    <span class="nominee-name">Joy</span>
+                                </div>
+                            </label>
+                        </li>
+                        <li class="nominee">
+                            <label>
+                                <input type="radio" name="best-dressed-female" value="Sonia" data-paystack-link="https://paystack.com/pay/sonia-dress">
+                                <div class="nominee-info">
+                                    <img src="/api/placeholder/50/50" alt="Sonia" class="nominee-avatar">
+                                    <span class="nominee-name">Sonia</span>
+                                </div>
+                            </label>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Most Social Category - Female(Paid) -->
+                <div class="category paid-category" data-category="Most-Social" data-paid="true">
+                    <h2>Most Social Student <span class="paid-badge">₦100 per vote</span></h2>
+                    <ul class="nominees">
+                        <li class="nominee">
+                            <label>
+                                <input type="radio" name="Most-Social" value="Hamza" data-paystack-link="https://paystack.com/pay/hamza-social">
+                                <div class="nominee-info">
+                                    <img src="/api/placeholder/50/50" alt="Hamza" class="nominee-avatar">
+                                    <span class="nominee-name">Hamza</span>
+                                </div>
+                            </label>
+                        </li>
+                        <li class="nominee">
+                            <label>
+                                <input type="radio" name="Most-Social" value="Princess" data-paystack-link="https://paystack.com/pay/princess-social">
+                                <div class="nominee-info">
+                                    <img src="/api/placeholder/50/50" alt="Princess" class="nominee-avatar">
+                                    <span class="nominee-name">Princess</span>
+                                </div>
+                            </label>
+                        </li>
+                        <li class="nominee">
+                            <label>
+                                <input type="radio" name="Most-Social" value="Eli" data-paystack-link="https://paystack.com/pay/orogun-social">
+                                <div class="nominee-info">
+                                    <img src="/api/placeholder/50/50" alt="Eli" class="nominee-avatar">
+                                    <span class="nominee-name">Eli</span>
+                                </div>
+                            </label>
+                        </li>
+                        <li class="nominee">
+                            <label>
+                                <input type="radio" name="Most-Social" value="OY" data-paystack-link="https://paystack.com/pay/oy-social">
+                                <div class="nominee-info">
+                                    <img src="/api/placeholder/50/50" alt="OY" class="nominee-avatar">
+                                    <span class="nominee-name">OY</span>
+                                </div>
+                            </label>
+                        </li>
+                        <li class="nominee">
+                            <label>
+                                <input type="radio" name="Most-Social" value="Jessica" data-paystack-link="https://paystack.com/pay/jessica-social">
+                                <div class="nominee-info">
+                                    <img src="/api/placeholder/50/50" alt="Jessica" class="nominee-avatar">
+                                    <span class="nominee-name">Jessica</span>
+                                </div>
+                            </label>
+                        </li>
+                        <li class="nominee">
+                            <label>
+                                <input type="radio" name="Most-Social" value="Simon" data-paystack-link="https://paystack.com/pay/simon-social">
+                                <div class="nominee-info">
+                                    <img src="/api/placeholder/50/50" alt="Simon" class="nominee-avatar">
+                                    <span class="nominee-name">Simon</span>
+                                </div>
+                            </label>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Business Brand of the Year Category (Paid) -->
+                <div class="category paid-category" data-category="business-brand" data-paid="true">
+                    <h2>Business Brand of the Year <span class="paid-badge">₦100 per vote</span></h2>
+                    <ul class="nominees">
+                        <li class="nominee">
+                            <label>
+                                <input type="radio" name="business-brand" value="Falcon Projects" data-paystack-link="https://paystack.com/pay/falcon-projects">
+                                <div class="nominee-info">
+                                    <img src="img/falconOne.jpeg" alt="Falcon Projects" class="nominee-avatar">
+                                    <span class="nominee-name">Falcon Projects</span>
+                                </div>
+                            </label>
+                        </li>
+                        <li class="nominee">
+                            <label>
+                                <input type="radio" name="business-brand" value="Maya Luxury Hairs" data-paystack-link="https://paystack.com/pay/maya-hair">
+                                <div class="nominee-info">
+                                    <img src="img/maya.png" alt="Maya Luxury Hairs" class="nominee-avatar">
+                                    <span class="nominee-name">Maya Luxury Hairs</span>
+                                </div>
+                            </label>
+                        </li>
+                        <li class="nominee">
+                            <label>
+                                <input type="radio" name="business-brand" value="Eleven Eleven" data-paystack-link="https://paystack.com/pay/eleven-eleven">
+                                <div class="nominee-info">
+                                    <img src="img/eleven.jpeg" alt="Eleven Eleven" class="nominee-avatar">
+                                    <span class="nominee-name">Eleven Eleven</span>
+                                </div>
+                            </label>
+                        </li>
+                        <li class="nominee">
+                            <label>
+                                <input type="radio" name="business-brand" value="Wangs Collection" data-paystack-link="https://paystack.com/pay/wangs-collection">
+                                <div class="nominee-info">
+                                    
+                                    <span class="nominee-name">Wangs Collection</span>
+                                </div>
+                            </label>
+                        </li>
+                        <li class="nominee">
+                            <label>
+                                <input type="radio" name="business-brand" value="Chi SkinCare" data-paystack-link="https://paystack.com/pay/chi-skincare">
+                                <div class="nominee-info">
+                                   
+                                    <span class="nominee-name">Chi SkinCare and Perfumes</span>
+                                </div>
+                            </label>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Creative of the year -->
+                <div class="category paid-category" data-category="Creative" data-paid="true">
+                    <h2>Creative of the Year <span class="paid-badge">₦100 per vote</span></h2>
+                    <ul class="nominees">
+                        <li class="nominee">
+                            <label>
+                                <input type="radio" name="Creative" value="Quavious DOP" data-paystack-link="https://paystack.com/pay/quavious-dop">
+                                <div class="nominee-info">
+                                    <img src="/api/placeholder/50/50" alt="Quavious DOP" class="nominee-avatar">
+                                    <span class="nominee-name">Quavious DOP - Musical Artist</span>
+                                </div>
+                            </label>
+                        </li>
+                        <li class="nominee">
+                            <label>
+                                <input type="radio" name="Creative" value="Princess" data-paystack-link="https://paystack.com/pay/princess-photography">
+                                <div class="nominee-info">
+                                    <img src="/api/placeholder/50/50" alt="Princess" class="nominee-avatar">
+                                    <span class="nominee-name">Princess - Photographer</span>
+                                </div>
+                            </label>
+                        </li>
+                        <li class="nominee">
+                            <label>
+                                <input type="radio" name="Creative" value="Christian" data-paystack-link="https://paystack.com/pay/christian-photography">
+                                <div class="nominee-info">
+                                    <img src="/api/placeholder/50/50" alt="Christian" class="nominee-avatar">
+                                    <span class="nominee-name">Christian - Photographer</span>
+                                </div>
+                            </label>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Sportman of the year -->
+                <div class="category paid-category" data-category="Sportman" data-paid="true">
+                    <h2>Sportman of the Year <span class="paid-badge">₦100 per vote</span></h2>
+                    <ul class="nominees">
+                        <li class="nominee">
+                            <label>
+                                <input type="radio" name="Sportman" value="Chuks" data-paystack-link="https://paystack.com/pay/chuks-sport">
+                                <div class="nominee-info">
+                                    <img src="/api/placeholder/50/50" alt="Chuks" class="nominee-avatar">
+                                    <span class="nominee-name">Chuks</span>
+                                </div>
+                            </label>
+                        </li>
+                        <li class="nominee">
+                            <label>
+                                <input type="radio" name="Sportman" value="Blacka" data-paystack-link="https://paystack.com/pay/yadak">
+                                <div class="nominee-info">
+                                    <img src="/api/placeholder/50/50" alt="Blacka" class="nominee-avatar">
+                                    <span class="nominee-name">Yadak Blacka</span>
+                                </div>
+                            </label>
+                        </li>
+                        <li class="nominee">
+                            <label>
+                                <input type="radio" name="Sportman" value="Light" data-paystack-link="https://paystack.com/pay/light-sports">
+                                <div class="nominee-info">
+                                    <img src="/api/placeholder/50/50" alt="Light" class="nominee-avatar">
+                                    <span class="nominee-name">Light</span>
+                                </div>
+                            </label>
+                        </li>
+                        <li class="nominee">
+                            <label>
+                                <input type="radio" name="Sportman" value="Likiba" data-paystack-link="https://paystack.com/pay/likiba">
+                                <div class="nominee-info">
+                                    <img src="/api/placeholder/50/50" alt="Likiba" class="nominee-avatar">
+                                    <span class="nominee-name">Likiba Williams</span>
+                                </div>
+                            </label>
+                        </li>
+                        <li class="nominee">
+                            <label>
+                                <input type="radio" name="Sportman" value="Bright" data-paystack-link="https://paystack.com/pay/bright-sport">
+                                <div class="nominee-info">
+                                    <img src="/api/placeholder/50/50" alt="Bright" class="nominee-avatar">
+                                    <span class="nominee-name">Bright</span>
+                                </div>
+                            </label>
+                        </li>
+                        <li class="nominee">
+                            <label>
+                                <input type="radio" name="Sportman" value="Jude" data-paystack-link="https://paystack.com/pay/jude-sports">
+                                <div class="nominee-info">
+                                    <img src="/api/placeholder/50/50" alt="Jude" class="nominee-avatar">
+                                    <span class="nominee-name">Jude Obatta</span>
+                                </div>
+                            </label>
+                        </li>
+                        <li class="nominee">
+                            <label>
+                                <input type="radio" name="Sportman" value="Oba" data-paystack-link="https://paystack.com/pay/oba">
+                                <div class="nominee-info">
+                                    <img src="/api/placeholder/50/50" alt="Oba" class="nominee-avatar">
+                                    <span class="nominee-name">Ebenezer</span>
+                                </div>
+                            </label>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Influencer Category -->
+                <div class="category paid-category" data-category="most-talented" data-paid="true">
+                    <h2>Influencer of the year <span class="paid-badge">₦100 per vote</span></h2>
+                    <ul class="nominees">
+                        <li class="nominee">
+                            <label>
+                                <input type="radio" name="most-talented" value="Hassan Bello" data-paystack-link="https://paystack.com/pay/hassan-influencer">
+                                <div class="nominee-info">
+                                    <img src="/api/placeholder/50/50" alt="Hassan Bello" class="nominee-avatar">
+                                    <span class="nominee-name">Hassan Bello</span>
+                                </div>
+                            </label>
+                        </li>
+                        <li class="nominee">
+                            <label>
+                                <input type="radio" name="most-talented" value="Bukola" data-paystack-link="https://paystack.com/pay/bukola-influence">
+                                <div class="nominee-info">
+                                    <img src="/api/placeholder/50/50" alt="Bukola" class="nominee-avatar">
+                                    <span class="nominee-name">Bukola</span>
+                                </div>
+                            </label>
+                        </li>
+                        <li class="nominee">
+                            <label>
+                                <input type="radio" name="most-talented" value="OY" data-paystack-link="https://paystack.com/pay/oy-influence">
+                                <div class="nominee-info">
+                                    <img src="/api/placeholder/50/50" alt="OY" class="nominee-avatar">
+                                    <span class="nominee-name">OY</span>
+                                </div>
+                            </label>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Bessed Dressed Female (Paid) -->
+                <div class="category paid-category" data-category="most-beautiful" data-paid="true">
+                    <h2>Most Beautiful <span class="paid-badge">₦100 per vote</span></h2>
+                    <ul class="nominees">
+                        <li class="nominee">
+                            <label>
+                                <input type="radio" name="most-beautiful" value="Courtney Oluchi" data-paystack-link="https://paystack.com/pay/courtney-beautiful">
+                                <div class="nominee-info">
+                                    <img src="/api/placeholder/50/50" alt="Courtney Oluchi" class="nominee-avatar">
+                                    <span class="nominee-name">Courtney Oluchi</span>
+                                </div>
+                            </label>
+                        </li>
+                        <li class="nominee">
+                            <label>
+                                <input type="radio" name="most-beautiful" value="Maya" data-paystack-link="https://paystack.com/pay/maya-beautiful">
+                                <div class="nominee-info">
+                                    <img src="/api/placeholder/50/50" alt="Maya" class="nominee-avatar">
+                                    <span class="nominee-name">Maya</span>
+                                </div>
+                            </label>
+                        </li>
+                        <li class="nominee">
+                            <label>
+                                <input type="radio" name="most-beautiful" value="Destiny Osarugue" data-paystack-link="https://paystack.com/pay/destiny-beautiful">
+                                <div class="nominee-info">
+                                    <img src="/api/placeholder/50/50" alt="Destiny Osarugue" class="nominee-avatar">
+                                    <span class="nominee-name">Destiny Osarugue</span>
+                                </div>
+                            </label>
+                        </li>
+                        <li class="nominee">
+                            <label>
+                                <input type="radio" name="most-beautiful" value="Princess" data-paystack-link="https://paystack.com/pay/princess-beautiful">
+                                <div class="nominee-info">
+                                    <img src="/api/placeholder/50/50" alt="Princess" class="nominee-avatar">
+                                    <span class="nominee-name">Princess</span>
+                                </div>
+                            </label>
+                        </li>
+                        <li class="nominee">
+                            <label>
+                                <input type="radio" name="most-beautiful" value="Francess" data-paystack-link="https://paystack.com/pay/francess-beautiful">
+                                <div class="nominee-info">
+                                    <img src="/api/placeholder/50/50" alt="Francess" class="nominee-avatar">
+                                    <span class="nominee-name">Francess</span>
+                                </div>
+                            </label>
+                        </li>
+                        <li class="nominee">
+                            <label>
+                                <input type="radio" name="most-beautiful" value="Chloe" data-paystack-link="https://paystack.com/pay/chloe-beautiful">
+                                <div class="nominee-info">
+                                    <img src="/api/placeholder/50/50" alt="Chloe" class="nominee-avatar">
+                                    <span class="nominee-name">Chloe</span>
+                                </div>
+                            </label>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Programmer of the year(Paid) -->
+                <div class="category paid-category" data-category="Programmer" data-paid="true">
+                    <h2>Programmer of the Year <span class="paid-badge">₦100 per vote</span></h2>
+                    <ul class="nominees">
+                        <li class="nominee">
+                            <label>
+                                <input type="radio" name="Programmer" value="Ibu" data-paystack-link="https://paystack.com/pay/ibu-programmer">
+                                <div class="nominee-info">
+                                    
+                                    <span class="nominee-name">Ibu Emmanuel</span>
+                                </div>
+                            </label>
+                        </li>
+                        <li class="nominee">
+                            <label>
+                                <input type="radio" name="Programmer" value="Ware" data-paystack-link="https://paystack.com/pay/ware-programmer">
+                                <div class="nominee-info">
+                                    
+                                    <span class="nominee-name">Ware</span>
+                                </div>
+                            </label>
+                        </li>
+                        <li class="nominee">
+                            <label>
+                                <input type="radio" name="Programmer" value="Aiseosa" data-paystack-link="https://paystack.com/pay/aiseosa-clinton">
+                                <div class="nominee-info">
+                                    
+                                    <span class="nominee-name">Aiseosa Clinton</span>
+                                </div>
+                            </label>
+                        </li>
+                        <li class="nominee">
+                            <label>
+                                <input type="radio" name="Programmer" value="Oamen" data-paystack-link="https://paystack.com/pay/oamen">
+                                <div class="nominee-info">
+                                    
+                                    <span class="nominee-name">Oamen Emmanuel</span>
+                                </div>
+                            </label>
+                        </li>
+                        <li class="nominee">
+                            <label>
+                                <input type="radio" name="Programmer" value="Jay" data-paystack-link="https://paystack.com/pay/jay-jay">
+                                <div class="nominee-info">
+                                    
+                                    <span class="nominee-name">Jay Jay</span>
+                                </div>
+                            </label>
+                        </li>
+                        <li class="nominee">
+                            <label>
+                                <input type="radio" name="Programmer" value="Favour" data-paystack-link="https://paystack.com/pay/favour-programmer">
+                                <div class="nominee-info">
+                                    
+                                    <span class="nominee-name">Favour</span>
+                                </div>
+                            </label>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Clown of the year(Paid) -->
+                <div class="category paid-category" data-category="Clown" data-paid="true">
+                    <h2>Clown of the Year <span class="paid-badge">₦100 per vote</span></h2>
+                    <ul class="nominees">
+                        <li class="nominee">
+                            <label>
+                                <input type="radio" name="Clown" value="Hamza" data-paystack-link="https://paystack.com/pay/hamza-clown">
+                                <div class="nominee-info">
+                                    
+                                    <span class="nominee-name">Hamza</span>
+                                </div>
+                            </label>
+                        </li>
+                        <li class="nominee">
+                            <label>
+                                <input type="radio" name="Clown" value="Divine" data-paystack-link="https://paystack.com/pay/divine-clown">
+                                <div class="nominee-info">
+                                    
+                                    <span class="nominee-name">Divine</span>
+                                </div>
+                            </label>
+                        </li>
+                        <li class="nominee">
+                            <label>
+                                <input type="radio" name="Clown" value="Eli" data-paystack-link="https://paystack.com/pay/eli-clown">
+                                <div class="nominee-info">
+                                    <span class="nominee-name">Eli</span>
+                                </div>
+                            </label>
+                        </li>
+                        <li class="nominee">
+                            <label>
+                                <input type="radio" name="Clown" value="Fortune" data-paystack-link="https://paystack.com/pay/fortune-clown">
+                                <div class="nominee-info">
+                                    
+                                    <span class="nominee-name">Fortune</span>
+                                </div>
+                            </label>
+                        </li>
+                        <li class="nominee">
+                            <label>
+                                <input type="radio" name="Clown" value="Isaac" data-paystack-link="https://paystack.com/pay/isaac-clown">
+                                <div class="nominee-info">
+                                   
+                                    <span class="nominee-name">Isaac</span>
+                                </div>
+                            </label>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Special Recognition Category -->
+                <div class="category" data-category="special-recognition">
+                    <h2>Special Recognition <span class="tooltip"><span class="tooltip-icon">?</span><span class="tooltip-text">This category requires additional information</span></span></h2>
+                    <ul class="nominees">
+                        <li class="nominee">
+                            <label>
+                                <input type="radio" name="special-recognition" value="Community Service">
+                                <div class="nominee-info">
+                                    <span class="nominee-name">HOD of the Year - Dr T.C Olayinka</span>
+                                </div>
+                            </label>
+                        </li>
+                        <li class="nominee">
+                            <label>
+                                <input type="radio" name="special-recognition" value="Academic Excellence">
+                                <div class="nominee-info">
+                                    <span class="nominee-name">Dean of the Year - Prof. Dipo Akomolafe</span>
+                                </div>
+                            </label>
+                        </li>
+                    </ul>
+                    <div class="google-form">
+                        <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSdZWhibGDQlRzWCNPg3W7KG9Je3v5cLEAasp82-FAmOKpmMQA/viewform?embedded=true" width="640" height="584" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>                    </div>
+                </div>
+            </div>
+
+            <div class="submit-container">
+                <button type="submit" class="btn btn-submit">Submit My Votes</button>
+            </div>
+        </form>
+    </div>
+
+    <!-- Payment Confirmation Modal -->
+    <div class="modal" id="payment-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Payment Required</h2>
+            </div>
+            <div class="modal-body">
+                <p>You're voting for <span id="nominee-name"></span> in the <span id="category-name"></span> category.</p>
+                <p>This is a paid category. You will be redirected to Paystack to complete your payment.</p>
+                <p></p><p style="color: blank; font-weight: bold; font-size: 17px; animation: blink 1s infinite;">The higher the amount, the greater your votes and chances of winning</p>
+
+                <style>
+                @keyframes blink {
+                  50% { opacity: 0; }
+                }
+                </style>
+                
+            </div>
+            <div class="modal-footer">
+                <button class="btn" id="cancel-payment">Cancel</button>
+                <button class="btn btn-submit" id="proceed-payment">Proceed to Payment</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div class="toast" id="toast">Vote submitted successfully!</div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Constants
+            const form = document.getElementById('voting-form');
+            const categories = document.querySelectorAll('.category');
+            const progressBar = document.getElementById('progress');
+            const progressText = document.getElementById('progress-text');
+            const categoriesCompleted = document.getElementById('categories-completed');
+            const paymentModal = document.getElementById('payment-modal');
+            const nomineeNameEl = document.getElementById('nominee-name');
+            const categoryNameEl = document.getElementById('category-name');
+            const cancelPaymentBtn = document.getElementById('cancel-payment');
+            const proceedPaymentBtn = document.getElementById('proceed-payment');
+            const toast = document.getElementById('toast');
+            const nameInput = document.getElementById('voter-name');
+            const emailInput = document.getElementById('voter-email');
+            const nameError = document.getElementById('name-error');
+            const emailError = document.getElementById('email-error');
+            
+            // For storing selected paid nominees
+            let paidVotes = {};
+            let currentPaystackLink = '';
+            
+            // Update progress bar
+            function updateProgress() {
+                const total = categories.length;
+                let completed = 0;
+                
+                categories.forEach(category => {
+                    const categoryName = category.getAttribute('data-category');
+                    const selectedRadio = document.querySelector(`input[name="${categoryName}"]:checked`);
+                    if (selectedRadio) {
+                        completed++;
+                    }
+                });
+                
+                const percentage = (completed / total) * 100;
+                progressBar.style.width = `${percentage}%`;
+                progressText.textContent = `${Math.round(percentage)}% Complete`;
+                categoriesCompleted.textContent = `${completed}/${total} Categories`;
+            }
+            
+            // Event listeners for radio buttons
+            categories.forEach(category => {
+                const categoryName = category.getAttribute('data-category');
+                const isPaid = category.hasAttribute('data-paid');
+                
+                const radioButtons = category.querySelectorAll(`input[name="${categoryName}"]`);
+                
+                radioButtons.forEach(radio => {
+                    radio.addEventListener('change', function() {
+                        if (isPaid) {
+                            // Store the selected paid nominee
+                            const nomineeName = this.value;
+                            const paystackLink = this.getAttribute('data-paystack-link');
+                            
+                            // Open payment modal
+                            nomineeNameEl.textContent = nomineeName;
+                            categoryNameEl.textContent = categoryName.replace('-', ' ');
+                            currentPaystackLink = paystackLink;
+                            paymentModal.style.display = 'flex';
+                            
+                            // Uncheck the radio button until payment is completed
+                            this.checked = false;
+                        } else {
+                            // Update progress for non-paid categories
+                            updateProgress();
+                        }
+                    });
+                });
+            });
+            
+            // Cancel payment button
+            cancelPaymentBtn.addEventListener('click', function() {
+                paymentModal.style.display = 'none';
+            });
+            
+            // Proceed to payment button
+            proceedPaymentBtn.addEventListener('click', function() {
+                // Redirect to Paystack
+                window.location.href = currentPaystackLink;
+                
+                // In a real application, you would handle the payment callback
+                // For this demo, we'll just simulate a successful payment
+                setTimeout(() => {
+                    paymentModal.style.display = 'none';
+                    
+                    // Show success toast
+                    toast.textContent = 'Redirecting to Paystack';
+                    toast.className = 'toast show';
+                    
+                    setTimeout(() => {
+                        toast.className = 'toast';
+                    }, 3000);
+                    
+                    // Update progress
+                    updateProgress();
+                }, 500);
+            });
+            
+            // Form submission
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // Validate name and email
+                let isValid = true;
+                
+                if (!nameInput.value.trim()) {
+                    nameError.style.display = 'block';
+                    isValid = false;
+                } else {
+                    nameError.style.display = 'none';
+                }
+                
+                if (!emailInput.value.trim() || !validateEmail(emailInput.value)) {
+                    emailError.style.display = 'block';
+                    isValid = false;
+                } else {
+                    emailError.style.display = 'none';
+                }
+                
+                if (!isValid) {
+                    return;
+                }
+                
+                // Check if at least one category is selected
+                let hasSelection = false;
+                categories.forEach(category => {
+                    const categoryName = category.getAttribute('data-category');
+                    const selectedRadio = document.querySelector(`input[name="${categoryName}"]:checked`);
+                    if (selectedRadio) {
+                        hasSelection = true;
+                    }
+                });
+                
+                if (!hasSelection) {
+                    toast.textContent = 'Please vote in at least one category.';
+                    toast.className = 'toast show error';
+                    
+                    setTimeout(() => {
+                        toast.className = 'toast';
+                    }, 3000);
+                    
+                    return;
+                }
+                
+                // Submit form - in a real application, you would send this data to your server
+                toast.textContent = 'Thank you! Your votes have been submitted successfully.';
+                toast.className = 'toast show';
+                
+                setTimeout(() => {
+                    toast.className = 'toast';
+                    // Reset form
+                    form.reset();
+                    updateProgress();
+                }, 3000);
+            });
+            
+            // Email validation
+            function validateEmail(email) {
+                const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                return re.test(email);
+            }
+            
+            // Initialize progress
+            updateProgress();
+        });
+    </script>
+    
+    <!-- The rest of your content would go here -->
+    
+    <script>
+        // Set a fixed target date (exactly 40 days from March 19, 2025)
+        const targetDate = new Date('April 28, 2025 00:00:00').getTime();
+        
+        // Update the countdown every second
+        const countdownTimer = setInterval(function() {
+            // Get today's date and time
+            const now = new Date().getTime();
+            
+            // Find the distance between now and the target date
+            const distance = targetDate - now;
+            
+            // Time calculations for days, hours, minutes and seconds
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+            
+            // Display the results
+            document.getElementById("days").innerText = days.toString().padStart(2, '0');
+            document.getElementById("hours").innerText = hours.toString().padStart(2, '0');
+            document.getElementById("minutes").innerText = minutes.toString().padStart(2, '0');
+            document.getElementById("seconds").innerText = seconds.toString().padStart(2, '0');
+            
+            // If the countdown is finished, display a message
+            if (distance < 0) {
+                clearInterval(countdownTimer);
+                document.getElementById("days").innerText = "00";
+                document.getElementById("hours").innerText = "00";
+                document.getElementById("minutes").innerText = "00";
+                document.getElementById("seconds").innerText = "00";
+                
+                document.querySelector(".countdown-title").innerText = "Event Has Begun!";
+            }
+        }, 1000);
+    </script>
+</body>
+</html>
