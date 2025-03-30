@@ -1,0 +1,768 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="View Live results from the Upcoming Computing Award Night.">
+    <link href="img/welsu.png" rel="icon">
+
+    <title>Department Award Night Results</title>
+    <style>
+        :root {
+            --primary: #3a86ff;
+            --secondary: #ff006e;
+            --success: #8ac926;
+            --background: #f8f9fa;
+            --card-bg: #ffffff;
+            --text: #212529;
+            --border: #dee2e6;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--background);
+            color: var(--text);
+            padding: 0px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 20px;
+            background: linear-gradient(135deg, #1a2a6c,  #0a183c, #000000);
+            color: white;
+            border-radius: 0px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .controls, .categories-grid {
+            padding: 0 20px;
+        }
+
+        h1 {
+            margin-bottom: 10px;
+            font-size: 2.5rem;
+        }
+
+        .header-details {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .last-updated {
+            font-size: 0.9rem;
+            margin-top: 10px;
+        }
+
+        .controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .search-container {
+            position: relative;
+            flex-grow: 1;
+            max-width: 400px;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 12px 20px;
+            border: 2px solid var(--border);
+            border-radius: 30px;
+            font-size: 16px;
+            background-color: var(--card-bg);
+            transition: all 0.3s;
+        }
+
+        input[type="text"]:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(58, 134, 255, 0.2);
+        }
+
+        .search-icon {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #6c757d;
+        }
+
+        .filter-container {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            padding: 8px 16px;
+            background-color: var(--card-bg);
+            border: 2px solid var(--border);
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-weight: 500;
+        }
+
+        .filter-btn:hover, .filter-btn.active {
+            background-color: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        .refresh-btn {
+            padding: 8px 16px;
+            background-color: var(--success);
+            color: white;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.2s;
+            font-weight: 500;
+        }
+
+        .refresh-btn:hover {
+            opacity: 0.9;
+            transform: translateY(-2px);
+        }
+
+        .categories-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+        }
+
+        .category-card {
+            background-color: var(--card-bg);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .category-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .category-header {
+            padding: 20px;
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .category-title {
+            font-size: 1.4rem;
+            margin-bottom: 5px;
+            color: var(--text);
+        }
+
+        .category-desc {
+            font-size: 0.9rem;
+            color: #6c757d;
+        }
+
+        .chart-container {
+            padding: 20px;
+            position: relative;
+            height: 250px;
+        }
+
+        .nominees-list {
+            list-style: none;
+            padding: 0 20px 20px;
+        }
+
+        .nominee-item {
+            display: flex;
+            align-items: center;
+            padding: 10px 0;
+            border-bottom: 1px solid var(--border);
+            position: relative;
+        }
+
+        .nominee-item:last-child {
+            border-bottom: none;
+        }
+
+        .nominee-img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-right: 15px;
+            border: 2px solid var(--border);
+        }
+
+        .nominee-info {
+            flex-grow: 1;
+        }
+
+        .nominee-name {
+            font-weight: 600;
+            margin-bottom: 2px;
+        }
+
+        .vote-count {
+            font-size: 0.9rem;
+            color: #6c757d;
+        }
+
+        .leader {
+            position: relative;
+        }
+
+        .leader::before {
+            content: '👑';
+            position: absolute;
+            top: -15px;
+            left: 15px;
+            font-size: 24px;
+            animation: float 2s ease-in-out infinite;
+        }
+
+        .leader .nominee-img {
+            border-color: var(--success);
+            box-shadow: 0 0 0 4px rgba(138, 201, 38, 0.2);
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-5px);
+            }
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .categories-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .controls {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .search-container {
+                max-width: 100%;
+            }
+        }
+
+        .loading-indicator {
+            text-align: center;
+            padding: 20px;
+            font-style: italic;
+            color: #6c757d;
+        }
+
+        .no-results {
+            text-align: center;
+            padding: 40px;
+            font-size: 1.2rem;
+            color: #6c757d;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>Department Award Night Results</h1>
+        <div class="header-details">Live Voting Results</div>
+        <div class="last-updated">Last updated: <span id="update-time">Loading...</span></div>
+    </header>
+
+    <div class="controls">
+        <div class="search-container">
+            <input type="text" id="search-input" placeholder="Search nominees or categories...">
+            <div class="search-icon">🔍</div>
+        </div>
+        
+        <div class="filter-container">
+            <button class="filter-btn active" data-filter="all">All Categories</button>
+            <button class="filter-btn" data-filter="individual">Individual Awards</button>
+            <button class="filter-btn" data-filter="team">Team Awards</button>
+        </div>
+        
+        <button id="refresh-btn" class="refresh-btn">
+            <span>Refresh</span>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M23 4V10H17" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M1 20V14H7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M3.51 9.00001C4.01717 7.56655 4.87913 6.2789 6.01547 5.27543C7.1518 4.27196 8.52547 3.58635 10.0083 3.28469C11.4911 2.98304 13.0348 3.07885 14.4721 3.56103C15.9094 4.04321 17.1947 4.89391 18.19 6.00001L23 10M1 14L5.81 18C6.80533 19.1061 8.09066 19.9568 9.52794 20.439C10.9652 20.9212 12.5089 21.017 13.9917 20.7153C15.4745 20.4137 16.8482 19.7281 17.9845 18.7246C19.1209 17.7211 19.9828 16.4335 20.49 15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+        </button>
+    </div>
+
+    <div id="loading" class="loading-indicator">Loading award data...</div>
+    <div id="no-results" class="no-results hidden">No matching results found.</div>
+
+    <div class="categories-grid" id="categories-container">
+        <!-- Categories will be populated here -->
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+    <script>
+        // Sample data for demonstration - would be replaced with API calls in production
+        const awardData = [
+            {
+                id: 1,
+                name: "Most Handsome",
+                description: "Recognizing the Most Handosme Student in the Department of Computing",
+                type: "individual",
+                nominees: [
+                    { id: 101, name: "Etinosa Frank", votes: 266, image: "img/frank.jpeg" },
+                    { id: 102, name: "Sotonye Green", votes: 1, image: "img/green.jpeg" },
+                    { id: 103, name: "Godswill Enajewhe", votes: 0, image: "img/godswill.jpeg" },
+                    { id: 104, name: "Nelson", votes: 0, image: "img/Nelson.jpeg" }
+                ]
+            },
+            {
+                id: 2,
+                name: "Freshest Fresher",
+                description: "Freshest Fresher in the Department of Computing",
+                type: "individual",
+                nominees: [
+                    { id: 201, name: "OZ", votes: 0, image: "img/OZX.jpeg" },
+                    { id: 202, name: "Godswill Enajewhe", votes: 0, image: "img/Godswill.jpeg" },
+                    { id: 203, name: "Arthur Prest", votes: 0, image: "img/arthur.jpeg" },
+                    { id: 204, name: "Godswill Enajewhe", votes: 0, image: "img/godswill.jpeg" }
+                ]
+                
+            },
+            {
+                id: 3,
+                name: "Business Brand of the Year",
+                description: "Recognizing the most Innovative Business Brand",
+                type: "team",
+                nominees: [
+                    { id: 301, name: "Falcon Project", votes: 570, image: "img/falconone.jpeg" },
+                    { id: 302, name: "Eleven Eleven", votes: 5, image: "img/eleven.jpeg" },
+                    { id: 303, name: "Maya Luxury Hairs", votes: 3, image: "img/maya.png" }
+                ]
+            },
+            {
+                id: 4,
+                name: "Course Rep of the Year",
+                description: "Recognizing the most efficient Course rep of the year",
+                type: "individual",
+                nominees: [
+                    { id: 401, name: "Treasure", votes: 5, image: "img/treasure.jpeg" },
+                    { id: 402, name: "francess", votes: 3, image: "img/francess.jpeg" },
+                    { id: 403, name: "JohnnyAI", votes: 2, image: "img/johnnyai.jpeg" },
+                    { id: 404, name: "Simon", votes: 1, image: "img/simon.jpeg" }
+                ]
+            },
+            {
+                id: 5,
+                name: "SportsPerson of the Year",
+                description: "Recognizing the most athletic student in Computing",
+                type: "individual",
+                nominees: [
+                    { id: 501, name: "Chuks", votes: 12, image: "img/chuks.jpeg" },
+                    { id: 502, name: "Blacka", votes: 0, image: "" },
+                    { id: 503, name: "Bright", votes: 0, image: "" },
+                    { id: 503, name: "Rachael", votes: 0, image: "img/rachael.jpeg" }
+
+                ]
+            },
+            {
+                id: 6,
+                name: "Best Dressed 100L",
+                description: "Best Dressed 100L in Computing",
+                type: "individual",
+                nominees: [
+                    { id: 601, name: "Godswill Enajewhe", votes: 0, image: "img/godswill.jpeg" },
+                    { id: 602, name: "Ehikwe Destiny", votes: 0, image: "img/clown.jpeg" },
+                    { id: 603, name: "OZ", votes: 0, image: "img/OZX.jpeg" },
+                    { id: 604, name: "Double G", votes: 0, image: "img/doubleg.jpeg" }
+                ]
+            },
+
+            {
+                id: 7,
+                name: "Best Dressed Male",
+                description: "Best Dressed Male in Computing",
+                type: "individual",
+                nominees: [
+                    { id: 701, name: "Ogatosin", votes: 0, image: "img/ogatosin.jpeg" },
+                    { id: 702, name: "Etinosa Frank", votes: 0, image: "img/frank.jpeg" },
+                    { id: 703, name: "Hassan Bello", votes: 0, image: "img/hassan.jpeg" },
+                    { id: 704, name: "AbdulMalik", votes: 0, image: "img/maleek.jpeg" }
+                ]
+            },
+
+            {
+                id: 8,
+                name: "Best Dressed Female",
+                description: "Best Dressed Female in Computing",
+                type: "individual",
+                nominees: [
+                    { id: 701, name: "Francess", votes: 0, image: "img/francess.jpeg" },
+                    { id: 702, name: "Maya", votes: 0, image: "img/maya.jpeg" },
+                    { id: 703, name: "OY", votes: 0, image: "img/oy.jpeg" },
+                    { id: 704, name: "Princess", votes: 0, image: "img/princess.jpeg" }
+                ]
+            },
+
+            {
+                id: 9,
+                name: "Creative of the Year",
+                description: "Recognizing the most Creative student in Computing",
+                type: "individual",
+                nominees: [
+                    { id: 701, name: "Quavious DOP", votes: 0, image: "img/wayward.jpeg" },
+                    { id: 702, name: "Christian", votes: 0, image: "img/christian.jpeg" },
+                    { id: 703, name: "Princess", votes: 0, image: "img/princess.jpeg" },
+                    { id: 704, name: "Deba Oni", votes: 0, image: "img/deba.jpeg" }
+                ]
+            },
+
+            {
+                id: 10,
+                name: "Most Social Student",
+                description: "Recognizing the most Social Student in Computing",
+                type: "individual",
+                nominees: [
+                    { id: 1001, name: "Hamza", votes: 0, image: "img/hamza.jpeg" },
+                    { id: 1002, name: "Double G", votes: 0, image: "img/doubleg.jpeg" },
+                    { id: 1003, name: "Treasure", votes: 0, image: "img/Treasure.jpeg" },
+                    { id: 1004, name: "Princess", votes: 0, image: "img/Princess.jpeg" }
+                ]
+            },
+
+            {
+                id: 11,
+                name: "Influencer of the Year",
+                description: "Recognizing the most Influencer Student in Campus and Social Media",
+                type: "individual",
+                nominees: [
+                    { id: 1101, name: "Hassan Bello", votes: 7, image: "img/hassan.jpeg" },
+                    { id: 1102, name: "Bukola", votes: 0, image: "img/deborah.jpeg" },
+                    { id: 1103, name: "Edwin", votes: 0, image: "img/Edwin.jpeg" }
+                ]
+            },
+
+            {
+                id: 12,
+                name: "Most Beautiful",
+                description: "Recognizing the most beautiful student in Computing",
+                type: "individual",
+                nominees: [
+                    { id: 1201, name: "Chloe", votes: 0, image: "img/khloe.jpg" },
+                    { id: 1202, name: "Maya", votes: 0, image: "img/Maya.jpeg" },
+                    { id: 1203, name: "Francess", votes: 0, image: "img/francess.jpeg" },
+                    { id: 1204, name: "Princess", votes: 0, image: "img/princess.jpeg" }
+                ]
+                
+            },
+
+            {
+                id: 13,
+                name: "Programmer of the Year",
+                description: "Recognizing the best Programmer in Computing",
+                type: "individual",
+                nominees: [
+                    { id: 1301, name: "Ware", votes: 0, image: "img/ware.jpeg" },
+                    { id: 1302, name: "Clinton", votes: 0, image: "img/clinton.jpeg" },
+                    { id: 1303, name: "Oamen Emmanuel", votes: 0, image: "" },
+                    { id: 1304, name: "Ibu Emmanuel", votes: 7, image: "" }
+                ]
+                
+            },
+
+            {
+                id: 14,
+                name: "Clown of the Year",
+                description: "Recognizing the most funny student in Computing",
+                type: "individual",
+                nominees: [
+                    { id: 1301, name: "Hamza", votes: 0, image: "img/hamza.jpeg" },
+                    { id: 1302, name: "Double G", votes: 0, image: "img/doubleg.jpeg" },
+                    { id: 1303, name: "Freddy", votes: 0, image: "img/freddy.jpeg" },
+                    { id: 1304, name: "Classic Clown", votes: 7, image: "img/clown.jpeg" }
+                ]
+                
+            },
+
+            {
+                id: 15,
+                name: "Lecturer of the Year",
+                description: "Recognizing the Lecturer of the year",
+                type: "individual",
+                nominees: [
+                    { id: 1501, name: "Dr. Seun Ogunfeyitimi", votes: 15, },
+                    { id: 1502, name: "Mr. Akilo B.E", votes: 0,  },
+                    { id: 1503, name: "Mr. Victor Eguavoen", votes: 0, },
+                    { id: 1504, name: "Mrs. Odimayomi J.A", votes: 7,  },
+                    { id: 1505, name: "Mr. Oyedotun S.A", votes: 7, }
+                ]
+                
+            }
+        ];
+
+        // Variables to store charts and current filter
+        const charts = {};
+        let currentFilter = 'all';
+        let searchTerm = '';
+
+        // Initialize the page and set up event listeners
+        document.addEventListener('DOMContentLoaded', function() {
+            updateLastUpdated();
+            renderCategories(awardData);
+            
+            // Set up search functionality
+            document.getElementById('search-input').addEventListener('input', function(e) {
+                searchTerm = e.target.value.toLowerCase();
+                filterCategories();
+            });
+            
+            // Set up category filters
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    currentFilter = this.getAttribute('data-filter');
+                    filterCategories();
+                });
+            });
+            
+            // Set up refresh button
+            document.getElementById('refresh-btn').addEventListener('click', function() {
+                document.getElementById('loading').classList.remove('hidden');
+                setTimeout(() => {
+                    refreshData();
+                    document.getElementById('loading').classList.add('hidden');
+                }, 1000);
+            });
+
+            // Auto refresh every 30 seconds
+            setInterval(refreshData, 30000);
+        });
+
+        // Update timestamp for last data refresh
+        function updateLastUpdated() {
+            const now = new Date();
+            const formattedTime = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+            document.getElementById('update-time').textContent = formattedTime;
+        }
+
+        // Render all category cards
+        function renderCategories(categories) {
+            const container = document.getElementById('categories-container');
+            container.innerHTML = '';
+            document.getElementById('loading').classList.add('hidden');
+            
+            if (categories.length === 0) {
+                document.getElementById('no-results').classList.remove('hidden');
+                return;
+            } else {
+                document.getElementById('no-results').classList.add('hidden');
+            }
+            
+            categories.forEach(category => {
+                const card = createCategoryCard(category);
+                container.appendChild(card);
+            });
+        }
+
+        // Create individual category card with chart and nominees list
+        function createCategoryCard(category) {
+            const card = document.createElement('div');
+            card.className = 'category-card';
+            card.setAttribute('data-type', category.type);
+            
+            // Sort nominees by vote count (descending)
+            category.nominees.sort((a, b) => b.votes - a.votes);
+            const leadingNominee = category.nominees[0];
+            
+            // Create card header
+            const header = document.createElement('div');
+            header.className = 'category-header';
+            header.innerHTML = `
+                <h2 class="category-title">${category.name}</h2>
+                <div class="category-desc">${category.description}</div>
+            `;
+            card.appendChild(header);
+            
+            // Create chart container
+            const chartContainer = document.createElement('div');
+            chartContainer.className = 'chart-container';
+            chartContainer.innerHTML = `<canvas id="chart-${category.id}"></canvas>`;
+            card.appendChild(chartContainer);
+            
+            // Create nominees list
+            const nomineesList = document.createElement('ul');
+            nomineesList.className = 'nominees-list';
+            
+            category.nominees.forEach(nominee => {
+                const isLeader = nominee.id === leadingNominee.id;
+                const listItem = document.createElement('li');
+                listItem.className = `nominee-item ${isLeader ? 'leader' : ''}`;
+                listItem.innerHTML = `
+                    <img src="${nominee.image}" alt="${nominee.name}" class="nominee-img">
+                    <div class="nominee-info">
+                        <div class="nominee-name">${nominee.name}</div>
+                        <div class="vote-count">${nominee.votes} votes</div>
+                    </div>
+                `;
+                nomineesList.appendChild(listItem);
+            });
+            
+            card.appendChild(nomineesList);
+            
+            // Initialize chart after DOM is fully loaded
+            setTimeout(() => {
+                initChart(category);
+            }, 0);
+            
+            return card;
+        }
+
+        // Initialize Chart.js chart for category
+        function initChart(category) {
+            const ctx = document.getElementById(`chart-${category.id}`).getContext('2d');
+            
+            // Prepare chart data
+            const labels = category.nominees.map(n => n.name);
+            const data = category.nominees.map(n => n.votes);
+            const colors = generateColors(category.nominees.length);
+            
+            // Create chart
+            charts[category.id] = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Votes',
+                        data: data,
+                        backgroundColor: colors,
+                        borderColor: colors.map(c => c.replace('0.7', '1')),
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: false
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return `${context.raw} votes`;
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            ticks: {
+                                precision: 0
+                            }
+                        }
+                    },
+                    animation: {
+                        duration: 1000,
+                        easing: 'easeOutQuart'
+                    }
+                }
+            });
+        }
+
+        // Generate different colors for chart bars
+        function generateColors(count) {
+            const baseColors = [
+                'rgba(58, 134, 255, 0.7)',   // Blue
+                'rgba(255, 0, 110, 0.7)',    // Pink
+                'rgba(138, 201, 38, 0.7)',   // Green
+                'rgba(255, 184, 0, 0.7)',    // Yellow
+                'rgba(131, 56, 236, 0.7)',   // Purple
+                'rgba(255, 122, 69, 0.7)'    // Orange
+            ];
+            
+            const colors = [];
+            for (let i = 0; i < count; i++) {
+                colors.push(baseColors[i % baseColors.length]);
+            }
+            
+            return colors;
+        }
+
+        // Filter categories based on search term and category type
+        function filterCategories() {
+            const filteredData = awardData.filter(category => {
+                // Check if category matches the filter
+                const matchesFilter = currentFilter === 'all' || category.type === currentFilter;
+                
+                // Check if category or nominees match the search term
+                const matchesSearch = searchTerm === '' || 
+                    category.name.toLowerCase().includes(searchTerm) ||
+                    category.description.toLowerCase().includes(searchTerm) ||
+                    category.nominees.some(nominee => nominee.name.toLowerCase().includes(searchTerm));
+                
+                return matchesFilter && matchesSearch;
+            });
+            
+            renderCategories(filteredData);
+        }
+
+        // Refresh data with simulated API call
+        function refreshData() {
+            // In a real application, this would fetch new data from an API
+            // For demonstration, we'll just randomize the vote counts
+            
+            awardData.forEach(category => {
+                category.nominees.forEach(nominee => {
+                    // Random increase between 0-3 votes
+                    const increase = Math.floor(Math.random() * 4);
+                    nominee.votes += increase;
+                    
+                    // Update charts with new data
+                    if (charts[category.id]) {
+                        const index = category.nominees.findIndex(n => n.id === nominee.id);
+                        charts[category.id].data.datasets[0].data[index] = nominee.votes;
+                    }
+                });
+                
+                // Re-sort nominees based on new vote counts
+                category.nominees.sort((a, b) => b.votes - a.votes);
+                
+                // Update charts
+                if (charts[category.id]) {
+                    charts[category.id].update();
+                }
+            });
+            
+            // Refresh the display
+            filterCategories();
+            updateLastUpdated();
+        }
+    </script>
+</body>
+</html>
