@@ -559,7 +559,9 @@
                 }, 1000);
             });
 
-            
+            // Auto refresh every 30 seconds
+            setInterval(refreshData, 30000);
+   
         });
 
         // Update timestamp for last data refresh
@@ -732,24 +734,22 @@
         }
 
         // Refresh data with simulated API call
-        // Refresh data without changing vote counts
-function refreshData() {
-    // Only refresh the display with existing data
-    filterCategories();
-    
-    // If you still want to update the charts to ensure they're displayed correctly
-    awardData.forEach(category => {
-        if (charts[category.id]) {
-            charts[category.id].update();
-        }
-    });
-    
-    // If you're keeping the time update (or replace with your own code if you've changed this)
-    if (typeof updateLastUpdated === 'function') {
-        updateLastUpdated();
-    }
-}
-                
+        function refreshData() {
+            // In a real application, this would fetch new data from an API
+            // For demonstration, we'll just randomize the vote counts
+            
+            awardData.forEach(category => {
+                category.nominees.forEach(nominee => {
+                    // Random increase between 0-3 votes
+                    const increase = Math.floor(Math.random() * 4);
+                    nominee.votes += increase;
+                    
+                    // Update charts with new data
+                    if (charts[category.id]) {
+                        const index = category.nominees.findIndex(n => n.id === nominee.id);
+                        charts[category.id].data.datasets[0].data[index] = nominee.votes;
+                    }
+                });           
                 // Re-sort nominees based on new vote counts
                 category.nominees.sort((a, b) => b.votes - a.votes);
                 
