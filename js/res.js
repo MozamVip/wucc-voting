@@ -95,7 +95,7 @@ const awardData = [
                     { id: 701, name: "Francess", votes: 0, image: "img/francess.jpeg" },
                     { id: 702, name: "Maya", votes: 0, image: "img/maya.jpeg" },
                     { id: 703, name: "OY", votes: 0, image: "img/OY.jpeg" },
-                    { id: 704, name: "Princess", votes: 0, image: "img/princess.jpeg" }
+                    { id: 704, name: "Princess Lights", votes: 0, image: "img/princess.jpeg" }
                 ]
             },
 
@@ -107,7 +107,7 @@ const awardData = [
                 nominees: [
                     { id: 701, name: "Quavious DOP", votes: 0, image: "img/wayward.jpeg" },
                     { id: 702, name: "Christian", votes: 0, image: "img/christian.jpeg" },
-                    { id: 703, name: "Princess", votes: 0, image: "img/princess.jpeg" },
+                    { id: 703, name: "Princess Lights", votes: 0, image: "img/princess.jpeg" },
                     { id: 704, name: "Deba Oni", votes: 0, image: "img/Deba.jpeg" }
                 ]
             },
@@ -121,7 +121,7 @@ const awardData = [
                     { id: 1001, name: "Jessica", votes: 5, image: "img/jessica.jpeg" },
                     { id: 1002, name: "Double G", votes: 0, image: "img/doubleG.jpeg" },
                     { id: 1003, name: "Treasure", votes: 0, image: "img/treasure.jpeg" },
-                    { id: 1004, name: "Princess", votes: 0, image: "img/princess.jpeg" }
+                    { id: 1004, name: "Princess Lights", votes: 0, image: "img/princess.jpeg" }
                 ]
             },
 
@@ -146,7 +146,7 @@ const awardData = [
                     { id: 1201, name: "Chloe", votes: 0, image: "img/khloe.jpg" },
                     { id: 1202, name: "Maya", votes: 0, image: "img/maya.jpeg" },
                     { id: 1203, name: "Francess", votes: 0, image: "img/francess.jpeg" },
-                    { id: 1204, name: "Princess", votes: 0, image: "img/princess.jpeg" }
+                    { id: 1204, name: "Princess Lights", votes: 0, image: "img/princess.jpeg" }
                 ]
                 
             },
