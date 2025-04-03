@@ -3,481 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Vote for your favorite nominees at the Computing Award Night.">
     <title>Computing Award Night Voting</title>
     <link href="img/welsu.png" rel="icon">
-    <style>
-        /* Reset some default styles */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        :root {
-            --primary-color: #3498db;
-            --secondary-color: #2ecc71;
-            --accent-color: #e74c3c;
-            --background-color: #f9f9f9;
-            --card-color: #ffffff;
-            --text-color: #333333;
-            --paid-category-color: #f39c12;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-
-        
-        body {
-            font-family: 'Arial', sans-serif;
-            background-color: #f5f5f5;
-        }
-        
-        /* Header styles */
-        .header {
-            background: linear-gradient(135deg, #1a2a6c,  #0a183c, #000000);
-            color: white;
-            padding: 2rem 0;
-            text-align: center;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .header::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><path d="M50 0 L100 50 L50 100 L0 50 Z" fill="rgba(255,255,255,0.05)"/></svg>') repeat;
-            opacity: 0.3;
-        }
-        
-        .header-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 2rem;
-            position: relative;
-            z-index: 1;
-        }
-        
-        .header-title {
-            font-size: 3rem;
-            margin-bottom: 0.5rem;
-            font-weight: 800;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-            letter-spacing: 1px;
-        }
-        
-        .header-subtitle {
-            font-size: 1.2rem;
-            margin-bottom: 1.5rem;
-            font-weight: 300;
-            opacity: 0.9;
-        }
-        
-        .award-icon {
-            display: inline-block;
-            margin: 0 0.5rem;
-            animation: float 3s ease-in-out infinite;
-        }
-        
-        @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
-        }
-        
-        /* Countdown styles */
-        .countdown-container {
-            display: flex;
-            justify-content: center;
-            margin-top: 1.5rem;
-            flex-wrap: wrap;
-        }
-        
-        .countdown-item {
-            margin: 0 0.8rem;
-            min-width: 80px;
-        }
-        
-        .countdown-value {
-            font-size: 2rem;
-            font-weight: 700;
-            background: rgba(255, 255, 255, 0.2);
-            border-radius: 8px;
-            padding: 0.5rem 0;
-            margin-bottom: 0.3rem;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            backdrop-filter: blur(5px);
-            min-width: 70px;
-            display: inline-block;
-        }
-        
-        .countdown-label {
-            font-size: 0.8rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            opacity: 0.9;
-        }
-        
-        .countdown-title {
-            font-size: 1.2rem;
-            margin-bottom: 0.8rem;
-            font-weight: 600;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
-        }
-        
-        /* Responsive styles */
-        @media (max-width: 768px) {
-            .header-title {
-                font-size: 2.2rem;
-            }
-            
-            .header-subtitle {
-                font-size: 1rem;
-            }
-            
-            .countdown-item {
-                margin: 0 0.5rem;
-                min-width: 60px;
-            }
-            
-            .countdown-value {
-                font-size: 1.5rem;
-                min-width: 50px;
-            }
-            
-            .countdown-label {
-                font-size: 0.7rem;
-            }
-        }
-        
-        @media (max-width: 480px) {
-            .header-title {
-                font-size: 1.8rem;
-            }
-            
-            .countdown-container {
-                margin-top: 1rem;
-            }
-            
-            .countdown-item {
-                margin: 0 0.3rem;
-                min-width: 50px;
-            }
-            
-            .countdown-value {
-                font-size: 1.2rem;
-                padding: 0.4rem 0;
-                min-width: 40px;
-            }
-        }
-
-        h1 {
-            font-size: 2.5rem;
-            margin-bottom: 10px;
-        }
-
-        .subtitle {
-            font-size: 1.2rem;
-            opacity: 0.8;
-        }
-
-        .progress-container {
-            margin: 20px 0;
-        }
-
-        .progress-bar {
-            height: 10px;
-            background-color: #e0e0e0;
-            border-radius: 5px;
-            overflow: hidden;
-            margin-top: 10px;
-        }
-
-        .progress {
-            height: 100%;
-            background-color: var(--secondary-color);
-            width: 0%;
-            transition: width 0.5s ease;
-        }
-
-        .category-container {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 20px;
-            margin-bottom: 30px;
-        }
-
-        .category {
-            background-color: var(--card-color);
-            border-radius: 10px;
-            padding: 20px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            flex: 1 1 100%;
-            transition: transform 0.3s ease;
-        }
-
-        @media (min-width: 768px) {
-            .category {
-                flex: 1 1 calc(50% - 20px);
-            }
-        }
-
-        @media (min-width: 1024px) {
-            .category {
-                flex: 1 1 calc(33.33% - 20px);
-            }
-        }
-
-        .category:hover {
-            transform: translateY(-5px);
-        }
-
-        .category h2 {
-            margin-bottom: 15px;
-            color: var(--primary-color);
-            border-bottom: 2px solid var(--primary-color);
-            padding-bottom: 10px;
-        }
-
-        .paid-category h2 {
-            color: #0a183c;
-            border-bottom: 2px solid #0a183c;
-        }
-
-        .paid-badge {
-            display: inline-block;
-            background-color: #0a183c;
-            color: white;
-            padding: 5px 10px;
-            border-radius: 5px;
-            font-size: 0.8rem;
-            margin-left: 10px;
-        }
-
-        .nominees {
-            list-style-type: none;
-        }
-
-        .nominee {
-            padding: 10px;
-            margin-bottom: 10px;
-            border-radius: 5px;
-            border: 1px solid #e0e0e0;
-            transition: all 0.3s ease;
-        }
-
-        .nominee:hover {
-            background-color: rgba(52, 152, 219, 0.1);
-            border-color: var(--primary-color);
-        }
-
-        .nominee label {
-            display: flex;
-            align-items: center;
-            cursor: pointer;
-        }
-
-        .nominee input[type="radio"] {
-            margin-right: 10px;
-        }
-
-        .nominee-info {
-            display: flex;
-            align-items: center;
-            flex: 1;
-        }
-
-        .nominee-avatar {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            object-fit: cover;
-            margin-right: 15px;
-        }
-
-        .nominee-name {
-            font-weight: bold;
-        }
-
-        .form-group {
-            margin-bottom: 20px;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 5px;
-            font-weight: bold;
-        }
-
-        .form-group input[type="text"],
-        .form-group input[type="email"] {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid #e0e0e0;
-            border-radius: 5px;
-            font-size: 1rem;
-        }
-
-        .submit-container {
-            text-align: center;
-            margin-top: 30px;
-        }
-
-        .btn {
-            padding: 12px 24px;
-            background-color: var(--primary-color);
-            color: white;
-            border: none;
-            border-radius: 5px;
-            font-size: 1rem;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
-
-        .btn:hover {
-            background-color: #2980b9;
-        }
-
-        .btn-submit {
-            background-color: var(--secondary-color);
-        }
-
-        .btn-submit:hover {
-            background-color: #27ae60;
-        }
-
-        .google-form {
-            margin-top: 20px;
-            border: 1px solid #e0e0e0;
-            border-radius: 10px;
-            overflow: hidden;
-            height: 300px;
-        }
-
-        .google-form iframe {
-            width: 100%;
-            height: 100%;
-            border: none;
-        }
-
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 1000;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
-            align-items: center;
-            justify-content: center;
-        }
-
-        .modal-content {
-            background-color: var(--card-color);
-            padding: 20px;
-            border-radius: 10px;
-            max-width: 500px;
-            width: 90%;
-            text-align: center;
-        }
-
-        .modal-header {
-            margin-bottom: 20px;
-        }
-
-        .modal-body {
-            margin-bottom: 20px;
-        }
-
-        .modal-footer {
-            display: flex;
-            justify-content: center;
-            gap: 10px;
-        }
-
-        .validation-error {
-            color: var(--accent-color);
-            font-size: 0.9rem;
-            margin-top: 5px;
-            display: none;
-        }
-
-        .tooltip {
-            position: relative;
-            display: inline-block;
-            margin-left: 5px;
-            cursor: help;
-        }
-
-        .tooltip-icon {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 20px;
-            height: 20px;
-            background-color: var(--primary-color);
-            color: white;
-            border-radius: 50%;
-            font-size: 12px;
-            font-weight: bold;
-        }
-
-        .tooltip-text {
-            visibility: hidden;
-            width: 200px;
-            background-color: #555;
-            color: #fff;
-            text-align: center;
-            border-radius: 6px;
-            padding: 5px;
-            position: absolute;
-            z-index: 1;
-            bottom: 125%;
-            left: 50%;
-            margin-left: -100px;
-            opacity: 0;
-            transition: opacity 0.3s;
-        }
-
-        .tooltip:hover .tooltip-text {
-            visibility: visible;
-            opacity: 1;
-        }
-
-        .toast {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background-color: var(--secondary-color);
-            color: white;
-            padding: 15px 20px;
-            border-radius: 5px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            transform: translateY(100px);
-            opacity: 0;
-            transition: all 0.5s ease;
-        }
-
-        .toast.show {
-            transform: translateY(0);
-            opacity: 1;
-        }
-
-        .toast.error {
-            background-color: var(--accent-color);
-        }
-    </style>
+    <link rel="stylesheet" href="css/home.css">
+    <script src="js/script.js" defer></script>
 </head>
 <body>
     <header class="header">
@@ -561,6 +90,16 @@
                                 </div>
                             </label>
                         </li>
+
+                        <li class="nominee">
+                            <label>
+                                <input type="radio" name="most-handsome" value="Veno" data-paystack-link="https://paystack.com/pay/veno-handsome">
+                                <div class="nominee-info">
+                                    <img src="img/veno.jpeg" alt="Veno" class="nominee-avatar">
+                                    <span class="nominee-name">Veno</span>
+                                </div>
+                            </label>
+                        </li>
                         
                         <li class="nominee">
                             <label>
@@ -617,15 +156,7 @@
                                 </div>
                             </label>
                         </li>
-                        <li class="nominee">
-                            <label>
-                                <input type="radio" name="most-handsome" value="Emmanuel Unishemi" data-paystack-link="https://paystack.com/pay/unishemi-handsome">
-                                <div class="nominee-info">
-                                    <!-- <img src="img/" alt="emmanuel-unishemi" class="nominee-avatar"> -->
-                                    <span class="nominee-name">Emmanuel Unishemi</span>
-                                </div>
-                            </label>
-                        </li>
+                        
                         <li class="nominee">
                             <label>
                                 <input type="radio" name="most-handsome" value="Double G" data-paystack-link="https://paystack.com/pay/doubleg-handsome">
@@ -641,6 +172,16 @@
                                 <div class="nominee-info">
                                     <!-- <img src="/api/placeholder/50/50" alt="Kelvin" class="nominee-avatar"> -->
                                     <span class="nominee-name">Kelvin</span>
+                                </div>
+                            </label>
+                        </li>
+
+                        <li class="nominee">
+                            <label>
+                                <input type="radio" name="most-handsome" value="Emmanuel Unishemi" data-paystack-link="https://paystack.com/pay/unishemi-handsome">
+                                <div class="nominee-info">
+                                    <!-- <img src="img/" alt="emmanuel-unishemi" class="nominee-avatar"> -->
+                                    <span class="nominee-name">Emmanuel Unishemi</span>
                                 </div>
                             </label>
                         </li>
@@ -804,6 +345,16 @@
                                 </div>
                             </label>
                         </li>
+
+                        <li class="nominee">
+                            <label>
+                                <input type="radio" name="best-dressed" value="Promise" data-paystack-link="https://paystack.com/pay/promise-dress">
+                                <div class="nominee-info">
+                                    <img src="img/promise.jpeg" alt="Funsho" class="nominee-avatar">
+                                    <span class="nominee-name">Promise</span>
+                                </div>
+                            </label>
+                        </li>
                        
                         <li class="nominee">
                             <label>
@@ -843,6 +394,8 @@
                                 </div>
                             </label>
                         </li>
+
+                       
                         <li class="nominee">
                             <label>
                                 <input type="radio" name="best-dressed" value="Kelvin" data-paystack-link="https://paystack.com/pay/kelvin-best-dressed">
@@ -918,22 +471,14 @@
 
                         <li class="nominee">
                             <label>
-                                <input type="radio" name="best-dressed-female" value="Lights" data-paystack-link="https://paystack.com/pay/princess-dress">
+                                <input type="radio" name="best-dressed-female" value="Princess" data-paystack-link="https://paystack.com/pay/princess-dress">
                                 <div class="nominee-info">
                                     <img src="img/princess.jpeg" alt="Princess" class="nominee-avatar">
-                                    <span class="nominee-name">Lights</span>
+                                    <span class="nominee-name">Princess</span>
                                 </div>
                             </label>
                         </li>
-                        <li class="nominee">
-                            <label>
-                                <input type="radio" name="best-dressed-female" value="Courtney" data-paystack-link="https://paystack.com/pay/courtney">
-                                <div class="nominee-info">
-                                    <!-- <img src="/api/placeholder/50/50" alt="Courtney" class="nominee-avatar"> -->
-                                    <span class="nominee-name">Courtney</span>
-                                </div>
-                            </label>
-                        </li>
+                        
                     
                         <li class="nominee">
                             <label>
@@ -941,6 +486,18 @@
                                 <div class="nominee-info">
                                     <img src="img/lifted.jpeg" alt="Lifted" class="nominee-avatar">
                                     <span class="nominee-name">Lifted</span>
+                                </div>
+                            </label>
+                        </li>
+
+                        
+
+                        <li class="nominee">
+                            <label>
+                                <input type="radio" name="best-dressed-female" value="Rachael" data-paystack-link="https://paystack.com/pay/rachael-dress">
+                                <div class="nominee-info">
+                                    <img src="img/rachael.jpeg" alt="rachael" class="nominee-avatar">
+                                    <span class="nominee-name">Rachael</span>
                                 </div>
                             </label>
                         </li>
@@ -957,10 +514,10 @@
 
                         <li class="nominee">
                             <label>
-                                <input type="radio" name="best-dressed-female" value="Rachael" data-paystack-link="https://paystack.com/pay/rachael-dress">
+                                <input type="radio" name="best-dressed-female" value="Courtney" data-paystack-link="https://paystack.com/pay/courtney">
                                 <div class="nominee-info">
-                                    <img src="img/rachael.jpeg" alt="rachael" class="nominee-avatar">
-                                    <span class="nominee-name">Rachael</span>
+                                    <!-- <img src="/api/placeholder/50/50" alt="Courtney" class="nominee-avatar"> -->
+                                    <span class="nominee-name">Courtney</span>
                                 </div>
                             </label>
                         </li>
@@ -973,6 +530,17 @@
                 <div class="category paid-category" data-category="Most-Social" data-paid="true">
                     <h2>Most Social Student <span class="paid-badge">₦100 per vote</span></h2>
                     <ul class="nominees">
+
+                        <li class="nominee">
+                            <label>
+                                <input type="radio" name="Most-Social" value="Jessica" data-paystack-link="https://paystack.com/pay/jessica-social">
+                                <div class="nominee-info">
+                                    <img src="img/jessica.jpeg" alt="Jessica" class="nominee-avatar">
+                                    <span class="nominee-name">Jessica</span>
+                                </div>
+                            </label>
+                        </li>
+
                         <li class="nominee">
                             <label>
                                 <input type="radio" name="Most-Social" value="Hamza" data-paystack-link="https://paystack.com/pay/hamza-social">
@@ -1004,10 +572,10 @@
 
                         <li class="nominee">
                             <label>
-                                <input type="radio" name="Most-Social" value="Lights" data-paystack-link="https://paystack.com/pay/princess-social">
+                                <input type="radio" name="Most-Social" value="Princess" data-paystack-link="https://paystack.com/pay/princess-social">
                                 <div class="nominee-info">
                                     <img src="img/princess.jpeg" alt="Princess" class="nominee-avatar">
-                                    <span class="nominee-name">Lights</span>
+                                    <span class="nominee-name">Princess</span>
                                 </div>
                             </label>
                         </li>
@@ -1053,15 +621,7 @@
                             </label>
                         </li>
 
-                        <li class="nominee">
-                            <label>
-                                <input type="radio" name="Most-Social" value="Jessica" data-paystack-link="https://paystack.com/pay/jessica-social">
-                                <div class="nominee-info">
-                                    <!-- <img src="/api/placeholder/50/50" alt="Jessica" class="nominee-avatar"> -->
-                                    <span class="nominee-name">Jessica</span>
-                                </div>
-                            </label>
-                        </li>
+                        
                         
                     </ul>
                 </div>
@@ -1186,6 +746,16 @@
                                 </div>
                             </label>
                         </li>
+
+                        <li class="nominee">
+                            <label>
+                                <input type="radio" name="Creative" value="Dignity" data-paystack-link="https://paystack.com/pay/dignity-creative">
+                                <div class="nominee-info">
+                                    <img src="img/dignity.jpeg" alt="Dignity" class="nominee-avatar">
+                                    <span class="nominee-name">Dignity - Musical Artist</span>
+                                </div>
+                            </label>
+                        </li>
                         
                         <li class="nominee">
                             <label>
@@ -1198,10 +768,10 @@
                         </li>
                         <li class="nominee">
                             <label>
-                                <input type="radio" name="Creative" value="Lights" data-paystack-link="https://paystack.com/pay/princess-photography">
+                                <input type="radio" name="Creative" value="Princess" data-paystack-link="https://paystack.com/pay/princess-photography">
                                 <div class="nominee-info">
                                     <img src="img/princess.jpeg" alt="Princess" class="nominee-avatar">
-                                    <span class="nominee-name">Lights - Photographer</span>
+                                    <span class="nominee-name">Princess - Photographer</span>
                                 </div>
                             </label>
                         </li>
@@ -1231,17 +801,26 @@
                                 </div>
                             </label>
                         </li>
+
                         <li class="nominee">
                             <label>
-                                <input type="radio" name="Sportman" value="Jude" data-paystack-link="https://paystack.com/pay/jude-sports">
+                                <input type="radio" name="Sportman" value="Promise" data-paystack-link="https://paystack.com/pay/promise-sport">
                                 <div class="nominee-info">
-                                    <img src="img/jude.jpeg" alt="Jude" class="nominee-avatar">
-                                    <span class="nominee-name">Jude Obatta</span>
+                                    <img src="img/promise.jpeg" alt="Promise" class="nominee-avatar">
+                                    <span class="nominee-name">Promise</span>
                                 </div>
                             </label>
                         </li>
 
-                       
+                        <li class="nominee">
+                            <label>
+                                <input type="radio" name="Sportman" value="Ogaga" data-paystack-link="https://paystack.com/pay/ogaga-sport">
+                                <div class="nominee-info">
+                                    <img src="img/ogaga.jpeg" alt="Ogaga" class="nominee-avatar">
+                                    <span class="nominee-name">Ogaga</span>
+                                </div>
+                            </label>
+                        </li>
 
                         <li class="nominee">
                             <label>
@@ -1263,12 +842,33 @@
                             </label>
                         </li>
 
-                         <li class="nominee">
+                        <li class="nominee">
                             <label>
                                 <input type="radio" name="Sportman" value="Blacka" data-paystack-link="https://paystack.com/pay/yadak">
                                 <div class="nominee-info">
                                     <img src="img/blacka.jpeg" alt="Blacka" class="nominee-avatar">
                                     <span class="nominee-name">Yadak Blacka</span>
+                                </div>
+                            </label>
+                        </li>
+
+
+                        <li class="nominee">
+                            <label>
+                                <input type="radio" name="Sportman" value="Jude" data-paystack-link="https://paystack.com/pay/jude-sports">
+                                <div class="nominee-info">
+                                    <img src="img/jude.jpeg" alt="Jude" class="nominee-avatar">
+                                    <span class="nominee-name">Jude Obatta</span>
+                                </div>
+                            </label>
+                        </li>
+
+                        <li class="nominee">
+                            <label>
+                                <input type="radio" name="Sportman" value="Deba Oni" data-paystack-link="https://paystack.com/pay/deba-sport">
+                                <div class="nominee-info">
+                                    <img src="img/Deba.jpeg" alt="Deba Oni" class="nominee-avatar">
+                                    <span class="nominee-name">Deba Oni</span>
                                 </div>
                             </label>
                         </li>
@@ -1283,19 +883,6 @@
                             </label>
                         </li>
 
-                         <li class="nominee">
-                            <label>
-                                <input type="radio" name="Sportman" value="Deba Oni" data-paystack-link="https://paystack.com/pay/deba-sport">
-                                <div class="nominee-info">
-                                    <img src="img/Deba.jpeg" alt="Deba Oni" class="nominee-avatar">
-                                    <span class="nominee-name">Deba Oni</span>
-                                </div>
-                            </label>
-                        </li>
-
-
-                    
-                       
                        
                         <li class="nominee">
                             <label>
@@ -1390,10 +977,10 @@
 
                         <li class="nominee">
                             <label>
-                                <input type="radio" name="most-beautiful" value="Lights" data-paystack-link="https://paystack.com/pay/princess-beautiful">
+                                <input type="radio" name="most-beautiful" value="Princess" data-paystack-link="https://paystack.com/pay/princess-beautiful">
                                 <div class="nominee-info">
                                     <img src="img/princess.jpeg" alt="Princess" class="nominee-avatar">
-                                    <span class="nominee-name">Lights</span>
+                                    <span class="nominee-name">Princess</span>
                                 </div>
                             </label>
                         </li>
@@ -1676,212 +1263,6 @@
     <!-- Toast Notification -->
     <div class="toast" id="toast">Vote submitted successfully!</div>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Constants
-            const form = document.getElementById('voting-form');
-            const categories = document.querySelectorAll('.category');
-            const progressBar = document.getElementById('progress');
-            const progressText = document.getElementById('progress-text');
-            const categoriesCompleted = document.getElementById('categories-completed');
-            const paymentModal = document.getElementById('payment-modal');
-            const nomineeNameEl = document.getElementById('nominee-name');
-            const categoryNameEl = document.getElementById('category-name');
-            const cancelPaymentBtn = document.getElementById('cancel-payment');
-            const proceedPaymentBtn = document.getElementById('proceed-payment');
-            const toast = document.getElementById('toast');
-            const nameInput = document.getElementById('voter-name');
-            const emailInput = document.getElementById('voter-email');
-            const nameError = document.getElementById('name-error');
-            const emailError = document.getElementById('email-error');
-            
-            // For storing selected paid nominees
-            let paidVotes = {};
-            let currentPaystackLink = '';
-            
-            // Update progress bar
-            function updateProgress() {
-                const total = categories.length;
-                let completed = 0;
-                
-                categories.forEach(category => {
-                    const categoryName = category.getAttribute('data-category');
-                    const selectedRadio = document.querySelector(`input[name="${categoryName}"]:checked`);
-                    if (selectedRadio) {
-                        completed++;
-                    }
-                });
-                
-                const percentage = (completed / total) * 100;
-                progressBar.style.width = `${percentage}%`;
-                progressText.textContent = `${Math.round(percentage)}% Complete`;
-                categoriesCompleted.textContent = `${completed}/${total} Categories`;
-            }
-            
-            // Event listeners for radio buttons
-            categories.forEach(category => {
-                const categoryName = category.getAttribute('data-category');
-                const isPaid = category.hasAttribute('data-paid');
-                
-                const radioButtons = category.querySelectorAll(`input[name="${categoryName}"]`);
-                
-                radioButtons.forEach(radio => {
-                    radio.addEventListener('change', function() {
-                        if (isPaid) {
-                            // Store the selected paid nominee
-                            const nomineeName = this.value;
-                            const paystackLink = this.getAttribute('data-paystack-link');
-                            
-                            // Open payment modal
-                            nomineeNameEl.textContent = nomineeName;
-                            categoryNameEl.textContent = categoryName.replace('-', ' ');
-                            currentPaystackLink = paystackLink;
-                            paymentModal.style.display = 'flex';
-                            
-                            // Uncheck the radio button until payment is completed
-                            this.checked = false;
-                        } else {
-                            // Update progress for non-paid categories
-                            updateProgress();
-                        }
-                    });
-                });
-            });
-            
-            // Cancel payment button
-            cancelPaymentBtn.addEventListener('click', function() {
-                paymentModal.style.display = 'none';
-            });
-            
-            // Proceed to payment button
-            proceedPaymentBtn.addEventListener('click', function() {
-                // Redirect to Paystack
-                window.location.href = currentPaystackLink;
-                
-                // In a real application, you would handle the payment callback
-                // For this demo, we'll just simulate a successful payment
-                setTimeout(() => {
-                    paymentModal.style.display = 'none';
-                    
-                    // Show success toast
-                    toast.textContent = 'Redirecting to Paystack';
-                    toast.className = 'toast show';
-                    
-                    setTimeout(() => {
-                        toast.className = 'toast';
-                    }, 3000);
-                    
-                    // Update progress
-                    updateProgress();
-                }, 500);
-            });
-            
-            // Form submission
-            form.addEventListener('submit', function(e) {
-                e.preventDefault();
-                
-                // Validate name and email
-                let isValid = true;
-                
-                if (!nameInput.value.trim()) {
-                    nameError.style.display = 'block';
-                    isValid = false;
-                } else {
-                    nameError.style.display = 'none';
-                }
-                
-                if (!emailInput.value.trim() || !validateEmail(emailInput.value)) {
-                    emailError.style.display = 'block';
-                    isValid = false;
-                } else {
-                    emailError.style.display = 'none';
-                }
-                
-                if (!isValid) {
-                    return;
-                }
-                
-                // Check if at least one category is selected
-                let hasSelection = false;
-                categories.forEach(category => {
-                    const categoryName = category.getAttribute('data-category');
-                    const selectedRadio = document.querySelector(`input[name="${categoryName}"]:checked`);
-                    if (selectedRadio) {
-                        hasSelection = true;
-                    }
-                });
-                
-                if (!hasSelection) {
-                    toast.textContent = 'Please vote in at least one category.';
-                    toast.className = 'toast show error';
-                    
-                    setTimeout(() => {
-                        toast.className = 'toast';
-                    }, 3000);
-                    
-                    return;
-                }
-                
-                // Submit form - in a real application, you would send this data to your server
-                toast.textContent = 'Thank you! Your votes have been submitted successfully.';
-                toast.className = 'toast show';
-                
-                setTimeout(() => {
-                    toast.className = 'toast';
-                    // Reset form
-                    form.reset();
-                    updateProgress();
-                }, 3000);
-            });
-            
-            // Email validation
-            function validateEmail(email) {
-                const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-                return re.test(email);
-            }
-            
-            // Initialize progress
-            updateProgress();
-        });
-    </script>
-    
-    <!-- The rest of your content would go here -->
-    
-    <script>
-        // Set a fixed target date (exactly 40 days from March 19, 2025)
-        const targetDate = new Date('May 3, 2025 00:00:00').getTime();
-        
-        // Update the countdown every second
-        const countdownTimer = setInterval(function() {
-            // Get today's date and time
-            const now = new Date().getTime();
-            
-            // Find the distance between now and the target date
-            const distance = targetDate - now;
-            
-            // Time calculations for days, hours, minutes and seconds
-            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-            
-            // Display the results
-            document.getElementById("days").innerText = days.toString().padStart(2, '0');
-            document.getElementById("hours").innerText = hours.toString().padStart(2, '0');
-            document.getElementById("minutes").innerText = minutes.toString().padStart(2, '0');
-            document.getElementById("seconds").innerText = seconds.toString().padStart(2, '0');
-            
-            // If the countdown is finished, display a message
-            if (distance < 0) {
-                clearInterval(countdownTimer);
-                document.getElementById("days").innerText = "00";
-                document.getElementById("hours").innerText = "00";
-                document.getElementById("minutes").innerText = "00";
-                document.getElementById("seconds").innerText = "00";
-                
-                document.querySelector(".countdown-title").innerText = "Event Has Begun!";
-            }
-        }, 1000);
-    </script>
+ 
 </body>
 </html>
