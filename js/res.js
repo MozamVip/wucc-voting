@@ -171,7 +171,7 @@ const awardData = [
                 description: "Recognizing the most funny student in Computing",
                 type: "individual",
                 nominees: [
-                    { id: 1301, name: "Hamza", votes: 0, image: "img/hamza.jpeg" },
+                    { id: 1301, name: "Hamza", votes: 3, image: "img/hamza.jpeg" },
                     { id: 1302, name: "Double G", votes: 0, image: "img/doubleG.jpeg" },
                     { id: 1303, name: "Freddy", votes: 0, image: "img/freddy.jpeg" },
                     { id: 1304, name: "Classic Clown", votes: 0, image: "img/clown.jpeg" }
