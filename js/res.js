@@ -54,7 +54,7 @@ const awardData = [
                 type: "individual",
                 nominees: [
                     { id: 501, name: "Chuks", votes: 12, image: "img/chuks.jpeg" },
-                    { id: 502, name: "Blacka", votes: 0, image: "img/blacka.jpeg" },
+                    { id: 502, name: "Blacka", votes: 30, image: "img/blacka.jpeg" },
                     { id: 503, name: "Bright", votes: 0, image: "img/bright.jpeg" },
                     { id: 503, name: "Jay Jay", votes: 0, image: "img/jayjay.jpeg" },
                    { id: 503, name: "Ebenezer (OBA)", votes: 10, image: "" }
@@ -81,10 +81,11 @@ const awardData = [
                 description: "Best Dressed Male in Computing",
                 type: "individual",
                 nominees: [
-                    { id: 701, name: "Ogatosin", votes: 5, image: "img/ogatosin.jpeg" },
+                    { id: 701, name: "Ogatosin", votes: 15, image: "img/ogatosin.jpeg" },
                     { id: 702, name: "Etinosa Frank", votes: 20, image: "img/Frank.jpeg" },
                     { id: 703, name: "Hassan Bello", votes: 0, image: "img/hassan.jpeg" },
-                    { id: 704, name: "AbdulMalik", votes: 0, image: "img/Maleek.jpeg" }
+                    { id: 704, name: "AbdulMalik", votes: 0, image: "img/Maleek.jpeg" },
+                            { id: 705, name: "5", votes: 0, image: "img/uyi.jpeg" },
                 ]
             },
 
@@ -94,7 +95,7 @@ const awardData = [
                 description: "Best Dressed Female in Computing",
                 type: "individual",
                 nominees: [
-                    { id: 701, name: "Francess", votes: 0, image: "img/francess.jpeg" },
+                    { id: 701, name: "Francess", votes: 3, image: "img/francess.jpeg" },
                     { id: 702, name: "Maya", votes: 0, image: "img/maya.jpeg" },
                     { id: 703, name: "OY", votes: 0, image: "img/OY.jpeg" },
                     { id: 704, name: "Princess Lights", votes: 0, image: "img/princess.jpeg" }
@@ -162,7 +163,8 @@ const awardData = [
                     { id: 1301, name: "Ware", votes: 0, image: "img/Ware.jpeg" },
                     { id: 1302, name: "Clinton", votes: 0, image: "img/clinton.jpeg" },
                     { id: 1303, name: "Oamen Emmanuel", votes: 0, image: "" },
-                    { id: 1304, name: "Ibu Emmanuel", votes: 0, image: "" }
+                    { id: 1304, name: "Ibu Emmanuel", votes: 0, image: "" },
+                   { id: 1305, name: "Jay Jay", votes: 2, image: "img/jayjay.jpeg" }
                 ]
                 
             },
