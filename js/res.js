@@ -167,7 +167,7 @@ const awardData = [
 
             {
                 id: 14,
-                name: "Clown of the Year",
+                name: "Entertainer of the year",
                 description: "Recognizing the most funny student in Computing",
                 type: "individual",
                 nominees: [
