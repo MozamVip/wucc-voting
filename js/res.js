@@ -5,7 +5,7 @@ const awardData = [
                 description: "Recognizing the Most Handosme Student in the Department of Computing",
                 type: "individual",
                 nominees: [
-                    { id: 101, name: "Etinosa Frank", votes: 317, image: "img/Frank.jpeg" },
+                    { id: 101, name: "Etinosa Frank", votes: 367, image: "img/Frank.jpeg" },
                     { id: 102, name: "Sotonye Green", votes: 26, image: "img/green.jpeg" },
                     { id: 103, name: "Godswill Enajewhe", votes: 0, image: "img/Godswill.jpeg" },
                     { id: 104, name: "Nelson", votes: 0, image: "img/nelson.jpeg" },
@@ -84,7 +84,7 @@ const awardData = [
                 type: "individual",
                 nominees: [
                     { id: 701, name: "Ogatosin", votes: 25, image: "img/ogatosin.jpeg" },
-                    { id: 702, name: "Etinosa Frank", votes: 20, image: "img/Frank.jpeg" },
+                    { id: 702, name: "Etinosa Frank", votes: 70, image: "img/Frank.jpeg" },
                     { id: 703, name: "Hassan Bello", votes: 0, image: "img/hassan.jpeg" },
                     { id: 704, name: "AbdulMalik", votes: 0, image: "img/Maleek.jpeg" }
             
