@@ -7,7 +7,6 @@ const awardData = [
                 nominees: [
                     { id: 101, name: "Etinosa Frank", votes: 501, image: "img/Frank.jpeg" },
                     { id: 102, name: "Sotonye Green", votes: 710, image: "img/green.jpeg" },
-                    { id: 103, name: "Godswill Enajewhe", votes: 0, image: "img/Godswill.jpeg" },
                     { id: 104, name: "Nelson", votes: 0, image: "img/nelson.jpeg" },
                     { id: 105, name: "Uyioghosa", votes: 5, image: "img/uyi.jpeg" },
                     { id: 106, name: "OZ", votes: 17, image: "img/OZx.jpeg" },
@@ -143,7 +142,7 @@ const awardData = [
                 nominees: [
                     { id: 1101, name: "Hassan Bello", votes: 1, image: "img/hassan.jpeg" },
                     { id: 1102, name: "Bukola", votes: 0, image: "img/deborah.jpeg" },
-                    { id: 1103, name: "Edwin", votes: 0, image: "img/edwin.jpeg" }
+                    { id: 1103, name: "Edwin", votes: 5, image: "img/edwin.jpeg" }
                 ]
             },
 
