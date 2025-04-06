@@ -35,7 +35,7 @@ const awardData = [
                     { id: 301, name: "Falcon Project", votes: 570, image: "img/falconOne.jpeg" },
                     { id: 302, name: "Eleven Eleven", votes: 0, image: "img/eleven.jpeg" },
                     { id: 303, name: "Maya Luxury Hairs", votes: 5, image: "img/maya.png" },
-                    { id: 304, name: "Wayward", votes: 0, image: "img/wayward.png" }
+                    { id: 304, name: "Wayward", votes: 0, image: "img/wayward.jpeg" }
 
                 ]
             },
