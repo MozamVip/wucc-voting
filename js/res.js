@@ -8,7 +8,9 @@ const awardData = [
                     { id: 101, name: "Etinosa Frank", votes: 266, image: "img/Frank.jpeg" },
                     { id: 102, name: "Sotonye Green", votes: 26, image: "img/green.jpeg" },
                     { id: 103, name: "Godswill Enajewhe", votes: 0, image: "img/Godswill.jpeg" },
-                    { id: 104, name: "Nelson", votes: 0, image: "img/nelson.jpeg" }
+                    { id: 104, name: "Nelson", votes: 0, image: "img/nelson.jpeg" },
+                    { id: 105, name: "Uyioghosa", votes: 5, image: "img/uyi.jpeg" }
+                    
                 ]
             },
             {
@@ -84,8 +86,8 @@ const awardData = [
                     { id: 701, name: "Ogatosin", votes: 15, image: "img/ogatosin.jpeg" },
                     { id: 702, name: "Etinosa Frank", votes: 20, image: "img/Frank.jpeg" },
                     { id: 703, name: "Hassan Bello", votes: 0, image: "img/hassan.jpeg" },
-                    { id: 704, name: "AbdulMalik", votes: 0, image: "img/Maleek.jpeg" },
-                            { id: 705, name: "5", votes: 0, image: "img/uyi.jpeg" },
+                    { id: 704, name: "AbdulMalik", votes: 0, image: "img/Maleek.jpeg" }
+            
                 ]
             },
 
