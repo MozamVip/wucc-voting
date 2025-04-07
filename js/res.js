@@ -199,11 +199,11 @@ const awardData = [
                 description: "Recognizing the Lecturer of the year",
                 type: "individual",
                 nominees: [
-                    { id: 1501, name: "Dr. Seun Ogunfeyitimi", votes: 1, },
+                    { id: 1501, name: "Dr. Seun Ogunfeyitimi", votes: 9, },
                     { id: 1502, name: "Mr. Akilo B.E", votes: 0,  },
-                    { id: 1503, name: "Mr. Victor Eguavoen", votes: 0, },
-                    { id: 1504, name: "Mrs. Odimayomi J.A", votes: 0,  },
-                    { id: 1505, name: "Mr. Oyedotun S.A", votes: 0, }
+                    { id: 1503, name: "Mr. Victor Eguavoen", votes: 3, },
+                    { id: 1504, name: "Mrs. Odimayomi J.A", votes: 6,  },
+                    { id: 1505, name: "Mr. Oyedotun S.A", votes: 1, }
                 ]
                 
             }
