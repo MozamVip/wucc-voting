@@ -6,7 +6,7 @@ const awardData = [
                 type: "individual",
                 nominees: [
                     { id: 101, name: "Etinosa Frank", votes: 501, image: "img/Frank.jpeg" },
-                    { id: 102, name: "Sotonye Green", votes: 730, image: "img/green.jpeg" },
+                    { id: 102, name: "Sotonye Green", votes: 830, image: "img/green.jpeg" },
                     { id: 104, name: "Nelson", votes: 0, image: "img/nelson.jpeg" },
                     { id: 105, name: "Uyioghosa", votes: 5, image: "img/uyi.jpeg" },
                     { id: 106, name: "OZ", votes: 17, image: "img/OZx.jpeg" },
