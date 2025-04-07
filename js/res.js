@@ -20,10 +20,10 @@ const awardData = [
                 description: "Freshest Fresher in the Department of Computing",
                 type: "individual",
                 nominees: [
-                    { id: 201, name: "OZ", votes: 10, image: "img/OZx.jpeg" },
+                    { id: 201, name: "OZ", votes: 55, image: "img/OZx.jpeg" },
                     { id: 202, name: "Godswill Enajewhe", votes: 0, image: "img/Godswill.jpeg" },
                     { id: 203, name: "Arthur Prest", votes: 0, image: "img/arthur.jpeg" },
-                    { id: 204, name: "Classic Clown", votes: 0, image: "img/clown.jpeg" }
+                    { id: 204, name: "Classic Clown", votes: 1, image: "img/clown.jpeg" }
                 ]
                 
             },
@@ -190,7 +190,7 @@ const awardData = [
                     { id: 1301, name: "Hamza", votes: 3, image: "img/hamza.jpeg" },
                     { id: 1302, name: "Double G", votes: 0, image: "img/doubleG.jpeg" },
                     { id: 1303, name: "Freddy", votes: 0, image: "img/freddy.jpeg" },
-                    { id: 1304, name: "Classic Clown", votes: 0, image: "img/clown.jpeg" },
+                    { id: 1304, name: "Classic Clown", votes: 1, image: "img/clown.jpeg" },
                     { id: 1304, name: "Fortune Oputa", votes: 9, image: "" }
                 ]
                 
