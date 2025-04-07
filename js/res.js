@@ -139,7 +139,7 @@ const awardData = [
 
             {
                 id: 11,
-                name: "Influencer of the Year",
+                name: "Content Creator of the Year",
                 description: "Recognizing the most Influencer Student in Campus and Social Media",
                 type: "individual",
                 nominees: [
