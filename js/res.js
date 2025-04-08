@@ -107,7 +107,7 @@ const awardData = [
                     { id: 702, name: "Maya", votes: 0, image: "img/maya.jpeg" },
                     { id: 703, name: "OY", votes: 0, image: "img/OY.jpeg" },
                     { id: 704, name: "Princess Lights", votes: 0, image: "img/princess.jpeg" },
-                    { id: 705, name: "Rachael", votes: 44, image: "img/rachael.jpeg" },
+                    { id: 705, name: "Rachael", votes: 51, image: "img/rachael.jpeg" },
                     { id: 706, name: "Treasure", votes: 3, image: "img/treasure.jpeg" }
                             
                 ]
@@ -161,7 +161,8 @@ const awardData = [
                     { id: 1201, name: "Chloe", votes: 0, image: "img/khloe.jpg" },
                     { id: 1202, name: "Maya", votes: 0, image: "img/maya.jpeg" },
                     { id: 1203, name: "Francess", votes: 1, image: "img/francess.jpeg" },
-                    { id: 1204, name: "Princess Lights", votes: 0, image: "img/princess.jpeg" }
+                    { id: 1204, name: "Princess Lights", votes: 0, image: "img/princess.jpeg" },
+                    { id: 1205, name: "Treasure", votes: 10, image: "img/treasure.jpeg" }
                 ]
                 
             },
