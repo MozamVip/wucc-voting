@@ -107,7 +107,7 @@ const awardData = [
                     { id: 702, name: "Maya", votes: 0, image: "img/maya.jpeg" },
                     { id: 703, name: "OY", votes: 0, image: "img/OY.jpeg" },
                     { id: 704, name: "Princess Lights", votes: 0, image: "img/princess.jpeg" },
-                    { id: 705, name: "Rachael", votes: 10, image: "img/rachael.jpeg" },
+                    { id: 705, name: "Rachael", votes: 15, image: "img/rachael.jpeg" },
                     { id: 706, name: "Treasure", votes: 3, image: "img/treasure.jpeg" }
                             
                 ]
