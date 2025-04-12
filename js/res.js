@@ -6,7 +6,7 @@ const awardData = [
                 type: "individual",
                 nominees: [
                     { id: 101, name: "Etinosa Frank", votes: 501, image: "img/Frank.jpeg" },
-                    { id: 102, name: "Sotonye Green", votes: 971, image: "img/green.jpeg" },
+                    { id: 102, name: "Sotonye Green", votes: 921, image: "img/green.jpeg" },
                     { id: 104, name: "Nelson", votes: 0, image: "img/nelson.jpeg" },
                     { id: 105, name: "Uyioghosa", votes: 5, image: "img/uyi.jpeg" },
                     { id: 106, name: "OZ", votes: 17, image: "img/OZx.jpeg" },
@@ -120,7 +120,7 @@ const awardData = [
                 type: "individual",
                 nominees: [
                     { id: 701, name: "Quavious DOP", votes: 0, image: "img/wayward.jpeg" },
-                    { id: 702, name: "Christian", votes: 0, image: "img/christian.jpeg" },
+                    { id: 702, name: "Christian", votes: 1, image: "img/christian.jpeg" },
                     { id: 703, name: "Princess Lights", votes: 0, image: "img/princess.jpeg" },
                     { id: 704, name: "Deba Oni", votes: 0, image: "img/Deba.jpeg" }
                 ]
