@@ -47,7 +47,7 @@ const awardData = [
                 description: "Recognizing the most efficient Course rep of the year",
                 type: "individual",
                 nominees: [
-                    { id: 401, name: "Treasure", votes: 5, image: "img/treasure.jpeg" },
+                    { id: 401, name: "Treasure", votes: 6, image: "img/treasure.jpeg" },
                     { id: 402, name: "francess", votes: 2, image: "img/francess.jpeg" },
                     { id: 403, name: "JohnnyAI", votes: 0, image: "img/johnnyAI.jpeg" },
                     { id: 404, name: "Simon", votes: 0, image: "img/simon.jpeg" }
@@ -108,7 +108,7 @@ const awardData = [
                     { id: 703, name: "OY", votes: 0, image: "img/OY.jpeg" },
                     { id: 704, name: "Princess Lights", votes: 0, image: "img/princess.jpeg" },
                     { id: 705, name: "Rachael", votes: 51, image: "img/rachael.jpeg" },
-                    { id: 706, name: "Treasure", votes: 3, image: "img/treasure.jpeg" }
+                    { id: 706, name: "Treasure", votes: 4, image: "img/treasure.jpeg" }
                             
                 ]
             },
@@ -134,7 +134,7 @@ const awardData = [
                 nominees: [
                     { id: 1001, name: "Jessica", votes: 5, image: "img/jessica.jpeg" },
                     { id: 1002, name: "Double G", votes: 0, image: "img/doubleG.jpeg" },
-                    { id: 1003, name: "Treasure", votes: 0, image: "img/treasure.jpeg" },
+                    { id: 1003, name: "Treasure", votes: 1, image: "img/treasure.jpeg" },
                     { id: 1004, name: "Princess Lights", votes: 0, image: "img/princess.jpeg" },
                     { id: 1005, name: "Nessa", votes: 25, image: "" }
                 ]
@@ -162,7 +162,7 @@ const awardData = [
                     { id: 1202, name: "Courtney Oluchi", votes: 7, image: "img/courtney.jpeg" },
                     { id: 1203, name: "Francess", votes: 1, image: "img/francess.jpeg" },
                     { id: 1204, name: "Princess Lights", votes: 0, image: "img/princess.jpeg" },
-                    { id: 1205, name: "Treasure", votes: 10, image: "img/treasure.jpeg" }
+                    { id: 1205, name: "Treasure", votes: 11, image: "img/treasure.jpeg" }
                 ]
                 
             },
