@@ -166,8 +166,8 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 
-// Set a fixed target date (exactly 40 days from March 19, 2025)
-const targetDate = new Date('May 3, 2025 00:00:00').getTime();
+// Set a fixed target date (exactly 40 days from March 21, 2025)
+const targetDate = new Date('March 21, 2025 00:00:00').getTime();
         
 // Update the countdown every second
 const countdownTimer = setInterval(function() {
