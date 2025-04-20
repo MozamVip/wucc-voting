@@ -77,7 +77,7 @@ const awardData = [
                 type: "individual",
                 nominees: [
                     { id: 601, name: "Godswill Enajewhe", votes: 0, image: "img/Godswill.jpeg" },
-                    { id: 602, name: "Ehikwe Destiny", votes: 1, image: "img/clown.jpeg" },
+                    { id: 602, name: "Ehikwe Destiny", votes: 1, image: "" },
                     { id: 603, name: "OZ", votes: 0, image: "img/OZx.jpeg" },
                     { id: 604, name: "Double G", votes: 0, image: "img/doubleG.jpeg" }
                 ]
