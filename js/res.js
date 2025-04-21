@@ -76,7 +76,7 @@ const awardData = [
                 description: "Best Dressed 100L in Computing",
                 type: "individual",
                 nominees: [
-                    { id: 601, name: "Godswill Enajewhe", votes: 0, image: "img/Godswill.jpeg" },
+                    { id: 601, name: "Godswill Enajewhe", votes: 40, image: "img/Godswill.jpeg" },
                     { id: 602, name: "Classic Clown", votes: 1, image: "img/clown.jpeg" },
                     { id: 603, name: "OZ", votes: 0, image: "img/OZx.jpeg" },
                     { id: 604, name: "Deba Oni", votes: 52, image: "img/Deba.jpeg" }
