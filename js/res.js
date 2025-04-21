@@ -79,7 +79,7 @@ const awardData = [
                     { id: 601, name: "Godswill Enajewhe", votes: 0, image: "img/Godswill.jpeg" },
                     { id: 602, name: "Classic Clown", votes: 1, image: "img/clown.jpeg" },
                     { id: 603, name: "OZ", votes: 0, image: "img/OZx.jpeg" },
-                    { id: 604, name: "Double G", votes: 0, image: "img/doubleG.jpeg" }
+                    { id: 604, name: "Deba Oni", votes: 52, image: "img/Deba.jpeg" }
                 ]
             },
 
@@ -122,7 +122,7 @@ const awardData = [
                     { id: 701, name: "Quavious DOP", votes: 0, image: "img/wayward.jpeg" },
                     { id: 702, name: "Christian", votes: 1, image: "img/christian.jpeg" },
                     { id: 703, name: "Princess Lights", votes: 0, image: "img/princess.jpeg" },
-                    { id: 704, name: "Deba Oni", votes: 0, image: "img/Deba.jpeg" }
+                    { id: 704, name: "Deba Oni", votes: 24, image: "img/Deba.jpeg" }
                 ]
             },
 
