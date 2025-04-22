@@ -50,7 +50,7 @@ const awardData = [
                 type: "individual",
                 nominees: [
                     { id: 401, name: "Treasure", votes: 11, image: "img/treasure.jpeg" },
-                    { id: 402, name: "francess", votes: 17, image: "img/francess.jpeg" },
+                    { id: 402, name: "francess", votes: 20, image: "img/francess.jpeg" },
                     { id: 403, name: "JohnnyAI", votes: 0, image: "img/johnnyAI.jpeg" },
                     { id: 404, name: "Simon", votes: 0, image: "img/simon.jpeg" }
                 ]
