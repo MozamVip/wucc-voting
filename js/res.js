@@ -105,7 +105,7 @@ const awardData = [
                 description: "Best Dressed Female in Computing",
                 type: "individual",
                 nominees: [
-                    { id: 701, name: "Francess", votes: 10, image: "img/francess.jpeg" },
+                    { id: 701, name: "Francess", votes: 15, image: "img/francess.jpeg" },
                     { id: 702, name: "Maya", votes: 0, image: "img/maya.jpeg" },
                     { id: 703, name: "OY", votes: 0, image: "img/OY.jpeg" },
                     { id: 704, name: "Princess Lights", votes: 0, image: "img/princess.jpeg" },
@@ -162,7 +162,7 @@ const awardData = [
                 nominees: [
                     { id: 1201, name: "Chloe", votes: 0, image: "img/khloe.jpg" },
                     { id: 1202, name: "Courtney Oluchi", votes: 27, image: "img/courtney.jpeg" },
-                    { id: 1203, name: "Francess", votes: 1, image: "img/francess.jpeg" },
+                    { id: 1203, name: "Francess", votes: 16, image: "img/francess.jpeg" },
                     { id: 1204, name: "Princess Lights", votes: 0, image: "img/princess.jpeg" },
                     { id: 1205, name: "Treasure", votes: 16, image: "img/treasure.jpeg" }
                 ]
