@@ -23,7 +23,9 @@ const awardData = [
                     { id: 201, name: "OZ", votes: 55, image: "img/OZx.jpeg" },
                     { id: 202, name: "Godswill Enajewhe", votes: 0, image: "img/Godswill.jpeg" },
                     { id: 203, name: "Arthur Prest", votes: 0, image: "img/arthur.jpeg" },
-                    { id: 204, name: "Classic Clown", votes: 1, image: "img/clown.jpeg" }
+                    { id: 204, name: "Classic Clown", votes: 1, image: "img/clown.jpeg" },
+                    { id: 205, name: "Emmanuel Unishemi", votes: 10, image: "" }
+                            
                 ]
                 
             },
@@ -159,7 +161,7 @@ const awardData = [
                 type: "individual",
                 nominees: [
                     { id: 1201, name: "Chloe", votes: 0, image: "img/khloe.jpg" },
-                    { id: 1202, name: "Courtney Oluchi", votes: 17, image: "img/courtney.jpeg" },
+                    { id: 1202, name: "Courtney Oluchi", votes: 27, image: "img/courtney.jpeg" },
                     { id: 1203, name: "Francess", votes: 1, image: "img/francess.jpeg" },
                     { id: 1204, name: "Princess Lights", votes: 0, image: "img/princess.jpeg" },
                     { id: 1205, name: "Treasure", votes: 16, image: "img/treasure.jpeg" }
