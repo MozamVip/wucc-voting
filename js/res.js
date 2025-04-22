@@ -23,7 +23,7 @@ const awardData = [
                     { id: 201, name: "OZ", votes: 55, image: "img/OZx.jpeg" },
                     { id: 202, name: "Godswill Enajewhe", votes: 0, image: "img/Godswill.jpeg" },
                     { id: 203, name: "Arthur Prest", votes: 0, image: "img/arthur.jpeg" },
-                    { id: 204, name: "Classic Clown", votes: 1, image: "img/clown.jpeg" },
+                    { id: 204, name: "Classic Clown", votes: 6, image: "img/clown.jpeg" },
                     { id: 205, name: "Emmanuel Unishemi", votes: 10, image: "" }
                             
                 ]
@@ -79,7 +79,7 @@ const awardData = [
                 type: "individual",
                 nominees: [
                     { id: 601, name: "Godswill Enajewhe", votes: 40, image: "img/Godswill.jpeg" },
-                    { id: 602, name: "Classic Clown", votes: 1, image: "img/clown.jpeg" },
+                    { id: 602, name: "Classic Clown", votes: 2, image: "img/clown.jpeg" },
                     { id: 603, name: "OZ", votes: 0, image: "img/OZx.jpeg" },
                     { id: 604, name: "Deba Oni", votes: 52, image: "img/Deba.jpeg" }
                 ]
