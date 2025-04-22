@@ -175,7 +175,7 @@ const awardData = [
                 description: "Recognizing the best Programmer in Computing",
                 type: "individual",
                 nominees: [
-                    { id: 1301, name: "Ware", votes: 50, image: "img/Ware.jpeg" },
+                    { id: 1301, name: "Ware", votes: 51, image: "img/Ware.jpeg" },
                     { id: 1302, name: "Clinton", votes: 0, image: "img/clinton.jpeg" },
                     { id: 1303, name: "Oamen Emmanuel", votes: 0, image: "" },
                     { id: 1304, name: "Ibu Emmanuel", votes: 0, image: "" },
