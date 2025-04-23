@@ -63,7 +63,7 @@ const awardData = [
                 nominees: [
                     { id: 501, name: "Chuks", votes: 12, image: "img/chuks.jpeg" },
                     { id: 502, name: "Blacka", votes: 110, image: "img/blacka.jpeg" },
-                    { id: 503, name: "Bright", votes: 93, image: "img/bright.jpeg" },
+                    { id: 503, name: "Bright", votes: 103, image: "img/bright.jpeg" },
                     { id: 504, name: "Jay Jay", votes: 0, image: "img/jayjay.jpeg" },
                    { id: 505, name: "Ebenezer (OBA)", votes: 10, image: "" },
                    { id: 506, name: "DABIG4", votes: 5, image: "img/jude.jpeg" },
@@ -81,7 +81,7 @@ const awardData = [
                     { id: 601, name: "Godswill Enajewhe", votes: 70, image: "img/Godswill.jpeg" },
                     { id: 602, name: "Classic Clown", votes: 21, image: "img/clown.jpeg" },
                     { id: 603, name: "OZ", votes: 0, image: "img/OZx.jpeg" },
-                    { id: 604, name: "Deba Oni", votes: 52, image: "img/Deba.jpeg" }
+                    { id: 604, name: "Deba Oni", votes: 57, image: "img/Deba.jpeg" }
                 ]
             },
 
