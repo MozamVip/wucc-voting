@@ -63,7 +63,7 @@ const awardData = [
                 nominees: [
                     { id: 501, name: "Chuks", votes: 12, image: "img/chuks.jpeg" },
                     { id: 502, name: "Blacka", votes: 110, image: "img/blacka.jpeg" },
-                    { id: 503, name: "Bright", votes: 103, image: "img/bright.jpeg" },
+                    { id: 503, name: "Bright", votes: 108, image: "img/bright.jpeg" },
                     { id: 504, name: "Jay Jay", votes: 0, image: "img/jayjay.jpeg" },
                    { id: 505, name: "Ebenezer (OBA)", votes: 10, image: "" },
                    { id: 506, name: "DABIG4", votes: 5, image: "img/jude.jpeg" },
