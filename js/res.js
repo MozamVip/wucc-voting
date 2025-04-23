@@ -194,7 +194,7 @@ const awardData = [
                     { id: 1302, name: "Double G", votes: 0, image: "img/doubleG.jpeg" },
                     { id: 1303, name: "Freddy", votes: 0, image: "img/freddy.jpeg" },
                     { id: 1304, name: "Classic Clown", votes: 130, image: "img/clown.jpeg" },
-                    { id: 1305, name: "Fortune Oputa", votes: 36, image: "" }
+                    { id: 1305, name: "Fortune Oputa", votes: 126, image: "" }
                 ]
                 
             },
