@@ -23,7 +23,7 @@ const awardData = [
                     { id: 201, name: "OZ", votes: 55, image: "img/OZx.jpeg" },
                     { id: 202, name: "Godswill Enajewhe", votes: 0, image: "img/Godswill.jpeg" },
                     { id: 203, name: "Arthur Prest", votes: 0, image: "img/arthur.jpeg" },
-                    { id: 204, name: "Classic Clown", votes: 16, image: "img/clown.jpeg" },
+                    { id: 204, name: "Classic Clown", votes: 17, image: "img/clown.jpeg" },
                     { id: 205, name: "Emmanuel Unishemi", votes: 10, image: "" }
                             
                 ]
@@ -49,7 +49,7 @@ const awardData = [
                 description: "Recognizing the most efficient Course rep of the year",
                 type: "individual",
                 nominees: [
-                    { id: 401, name: "Treasure", votes: 11, image: "img/treasure.jpeg" },
+                    { id: 401, name: "Treasure", votes: 21, image: "img/treasure.jpeg" },
                     { id: 402, name: "francess", votes: 20, image: "img/francess.jpeg" },
                     { id: 403, name: "JohnnyAI", votes: 0, image: "img/johnnyAI.jpeg" },
                     { id: 404, name: "Simon", votes: 0, image: "img/simon.jpeg" }
@@ -105,11 +105,11 @@ const awardData = [
                 description: "Best Dressed Female in Computing",
                 type: "individual",
                 nominees: [
-                    { id: 701, name: "Francess", votes: 38, image: "img/francess.jpeg" },
+                    { id: 701, name: "Francess", votes: 68, image: "img/francess.jpeg" },
                     { id: 702, name: "Maya", votes: 0, image: "img/maya.jpeg" },
                     { id: 703, name: "OY", votes: 0, image: "img/OY.jpeg" },
                     { id: 704, name: "Princess Lights", votes: 0, image: "img/princess.jpeg" },
-                    { id: 705, name: "Rachael", votes: 51, image: "img/rachael.jpeg" },
+                    { id: 705, name: "Rachael", votes: 71, image: "img/rachael.jpeg" },
                     { id: 706, name: "Treasure", votes: 4, image: "img/treasure.jpeg" }
                             
                 ]
@@ -193,7 +193,7 @@ const awardData = [
                     { id: 1301, name: "Hamza", votes: 3, image: "img/hamza.jpeg" },
                     { id: 1302, name: "Double G", votes: 0, image: "img/doubleG.jpeg" },
                     { id: 1303, name: "Freddy", votes: 0, image: "img/freddy.jpeg" },
-                    { id: 1304, name: "Classic Clown", votes: 5, image: "img/clown.jpeg" },
+                    { id: 1304, name: "Classic Clown", votes: 20, image: "img/clown.jpeg" },
                     { id: 1305, name: "Fortune Oputa", votes: 14, image: "" }
                 ]
                 
