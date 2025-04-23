@@ -49,7 +49,7 @@ const awardData = [
                 description: "Recognizing the most efficient Course rep of the year",
                 type: "individual",
                 nominees: [
-                    { id: 401, name: "Treasure", votes: 21, image: "img/treasure.jpeg" },
+                    { id: 401, name: "Treasure", votes: 71, image: "img/treasure.jpeg" },
                     { id: 402, name: "francess", votes: 20, image: "img/francess.jpeg" },
                     { id: 403, name: "JohnnyAI", votes: 0, image: "img/johnnyAI.jpeg" },
                     { id: 404, name: "Simon", votes: 0, image: "img/simon.jpeg" }
