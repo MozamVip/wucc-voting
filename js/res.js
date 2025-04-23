@@ -23,7 +23,7 @@ const awardData = [
                     { id: 201, name: "OZ", votes: 55, image: "img/OZx.jpeg" },
                     { id: 202, name: "Godswill Enajewhe", votes: 0, image: "img/Godswill.jpeg" },
                     { id: 203, name: "Arthur Prest", votes: 0, image: "img/arthur.jpeg" },
-                    { id: 204, name: "Classic Clown", votes: 6, image: "img/clown.jpeg" },
+                    { id: 204, name: "Classic Clown", votes: 14, image: "img/clown.jpeg" },
                     { id: 205, name: "Emmanuel Unishemi", votes: 10, image: "" }
                             
                 ]
@@ -79,7 +79,7 @@ const awardData = [
                 type: "individual",
                 nominees: [
                     { id: 601, name: "Godswill Enajewhe", votes: 70, image: "img/Godswill.jpeg" },
-                    { id: 602, name: "Classic Clown", votes: 7, image: "img/clown.jpeg" },
+                    { id: 602, name: "Classic Clown", votes: 18, image: "img/clown.jpeg" },
                     { id: 603, name: "OZ", votes: 0, image: "img/OZx.jpeg" },
                     { id: 604, name: "Deba Oni", votes: 52, image: "img/Deba.jpeg" }
                 ]
@@ -105,7 +105,7 @@ const awardData = [
                 description: "Best Dressed Female in Computing",
                 type: "individual",
                 nominees: [
-                    { id: 701, name: "Francess", votes: 18, image: "img/francess.jpeg" },
+                    { id: 701, name: "Francess", votes: 38, image: "img/francess.jpeg" },
                     { id: 702, name: "Maya", votes: 0, image: "img/maya.jpeg" },
                     { id: 703, name: "OY", votes: 0, image: "img/OY.jpeg" },
                     { id: 704, name: "Princess Lights", votes: 0, image: "img/princess.jpeg" },
@@ -193,7 +193,7 @@ const awardData = [
                     { id: 1301, name: "Hamza", votes: 3, image: "img/hamza.jpeg" },
                     { id: 1302, name: "Double G", votes: 0, image: "img/doubleG.jpeg" },
                     { id: 1303, name: "Freddy", votes: 0, image: "img/freddy.jpeg" },
-                    { id: 1304, name: "Classic Clown", votes: 1, image: "img/clown.jpeg" },
+                    { id: 1304, name: "Classic Clown", votes: 5, image: "img/clown.jpeg" },
                     { id: 1305, name: "Fortune Oputa", votes: 14, image: "" }
                 ]
                 
