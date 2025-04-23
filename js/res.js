@@ -78,7 +78,7 @@ const awardData = [
                 description: "Best Dressed 100L in Computing",
                 type: "individual",
                 nominees: [
-                    { id: 601, name: "Godswill Enajewhe", votes: 40, image: "img/Godswill.jpeg" },
+                    { id: 601, name: "Godswill Enajewhe", votes: 70, image: "img/Godswill.jpeg" },
                     { id: 602, name: "Classic Clown", votes: 7, image: "img/clown.jpeg" },
                     { id: 603, name: "OZ", votes: 0, image: "img/OZx.jpeg" },
                     { id: 604, name: "Deba Oni", votes: 52, image: "img/Deba.jpeg" }
@@ -138,7 +138,7 @@ const awardData = [
                     { id: 1002, name: "Double G", votes: 0, image: "img/doubleG.jpeg" },
                     { id: 1003, name: "Treasure", votes: 1, image: "img/treasure.jpeg" },
                     { id: 1004, name: "Princess Lights", votes: 0, image: "img/princess.jpeg" },
-                    { id: 1005, name: "Nessa", votes: 32, image: "" }
+                    { id: 1005, name: "Nessa", votes: 40, image: "" }
                 ]
             },
 
@@ -162,7 +162,7 @@ const awardData = [
                 nominees: [
                     { id: 1201, name: "Chloe", votes: 0, image: "img/khloe.jpg" },
                     { id: 1202, name: "Courtney Oluchi", votes: 27, image: "img/courtney.jpeg" },
-                    { id: 1203, name: "Francess", votes: 19, image: "img/francess.jpeg" },
+                    { id: 1203, name: "Francess", votes: 31, image: "img/francess.jpeg" },
                     { id: 1204, name: "Princess Lights", votes: 0, image: "img/princess.jpeg" },
                     { id: 1205, name: "Treasure", votes: 16, image: "img/treasure.jpeg" }
                 ]
