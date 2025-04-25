@@ -197,6 +197,6 @@ const countdownTimer = setInterval(function() {
         document.getElementById("minutes").innerText = "00";
         document.getElementById("seconds").innerText = "00";
         
-        document.querySelector(".countdown-title").innerText = "Event Has Begun!";
+        document.querySelector(".countdown-title").innerText = "VOTING HAS ENEDED!";
     }
 }, 1000);
