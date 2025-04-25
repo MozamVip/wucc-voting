@@ -61,7 +61,7 @@ const awardData = [
                 description: "Recognizing the most athletic student in Computing",
                 type: "individual",
                 nominees: [
-                    { id: 501, name: "Chuks", votes: 42, image: "img/chuks.jpeg" },
+                    { id: 501, name: "Chuks", votes: 80, image: "img/chuks.jpeg" },
                     { id: 502, name: "Blacka", votes: 110, image: "img/blacka.jpeg" },
                     { id: 503, name: "Bright", votes: 108, image: "img/bright.jpeg" },
                     { id: 504, name: "Jay Jay", votes: 0, image: "img/jayjay.jpeg" },
