@@ -35,7 +35,7 @@ const awardData = [
                 description: "Recognizing the most Innovative Business Brand",
                 type: "team",
                 nominees: [
-                    { id: 301, name: "Falcon Project", votes: 570, image: "img/falconOne.jpeg" },
+                    { id: 301, name: "Falcon Project", votes: 640, image: "img/falconOne.jpeg" },
                     { id: 302, name: "Eleven Eleven", votes: 0, image: "img/eleven.jpeg" },
                     { id: 303, name: "Maya Luxury Hairs", votes: 5, image: "img/maya.png" },
                     { id: 304, name: "Wayward", votes: 0, image: "img/wayward.jpeg" },
@@ -61,7 +61,7 @@ const awardData = [
                 description: "Recognizing the most athletic student in Computing",
                 type: "individual",
                 nominees: [
-                    { id: 501, name: "Chuks", votes: 82, image: "img/chuks.jpeg" },
+                    { id: 501, name: "Chuks", votes: 132, image: "img/chuks.jpeg" },
                     { id: 502, name: "Blacka", votes: 110, image: "img/blacka.jpeg" },
                     { id: 503, name: "Bright", votes: 108, image: "img/bright.jpeg" },
                     { id: 504, name: "Jay Jay", votes: 0, image: "img/jayjay.jpeg" },
@@ -161,7 +161,7 @@ const awardData = [
                 type: "individual",
                 nominees: [
                     { id: 1201, name: "Chloe", votes: 0, image: "img/khloe.jpg" },
-                    { id: 1202, name: "Courtney Oluchi", votes: 27, image: "img/courtney.jpeg" },
+                    { id: 1202, name: "Courtney Oluchi", votes: 77, image: "img/courtney.jpeg" },
                     { id: 1203, name: "Francess", votes: 41, image: "img/francess.jpeg" },
                     { id: 1204, name: "Princess Lights", votes: 0, image: "img/princess.jpeg" },
                     { id: 1205, name: "Treasure", votes: 21, image: "img/treasure.jpeg" }
