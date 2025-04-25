@@ -50,7 +50,7 @@ const awardData = [
                 type: "individual",
                 nominees: [
                     { id: 401, name: "Treasure", votes: 71, image: "img/treasure.jpeg" },
-                    { id: 402, name: "francess", votes: 20, image: "img/francess.jpeg" },
+                    { id: 402, name: "francess", votes: 30, image: "img/francess.jpeg" },
                     { id: 403, name: "JohnnyAI", votes: 0, image: "img/johnnyAI.jpeg" },
                     { id: 404, name: "Simon", votes: 0, image: "img/simon.jpeg" }
                 ]
@@ -61,7 +61,7 @@ const awardData = [
                 description: "Recognizing the most athletic student in Computing",
                 type: "individual",
                 nominees: [
-                    { id: 501, name: "Chuks", votes: 12, image: "img/chuks.jpeg" },
+                    { id: 501, name: "Chuks", votes: 17, image: "img/chuks.jpeg" },
                     { id: 502, name: "Blacka", votes: 110, image: "img/blacka.jpeg" },
                     { id: 503, name: "Bright", votes: 108, image: "img/bright.jpeg" },
                     { id: 504, name: "Jay Jay", votes: 0, image: "img/jayjay.jpeg" },
@@ -105,11 +105,11 @@ const awardData = [
                 description: "Best Dressed Female in Computing",
                 type: "individual",
                 nominees: [
-                    { id: 701, name: "Francess", votes: 68, image: "img/francess.jpeg" },
+                    { id: 701, name: "Francess", votes: 112, image: "img/francess.jpeg" },
                     { id: 702, name: "Maya", votes: 0, image: "img/maya.jpeg" },
                     { id: 703, name: "OY", votes: 0, image: "img/OY.jpeg" },
                     { id: 704, name: "Princess Lights", votes: 0, image: "img/princess.jpeg" },
-                    { id: 705, name: "Rachael", votes: 91, image: "img/rachael.jpeg" },
+                    { id: 705, name: "Rachael", votes: 93, image: "img/rachael.jpeg" },
                     { id: 706, name: "Treasure", votes: 4, image: "img/treasure.jpeg" }
                             
                 ]
@@ -138,7 +138,7 @@ const awardData = [
                     { id: 1002, name: "Double G", votes: 0, image: "img/doubleG.jpeg" },
                     { id: 1003, name: "Treasure", votes: 1, image: "img/treasure.jpeg" },
                     { id: 1004, name: "Princess Lights", votes: 0, image: "img/princess.jpeg" },
-                    { id: 1005, name: "Nessa", votes: 40, image: "" }
+                    { id: 1005, name: "Nessa", votes: 55, image: "" }
                 ]
             },
 
@@ -162,9 +162,9 @@ const awardData = [
                 nominees: [
                     { id: 1201, name: "Chloe", votes: 0, image: "img/khloe.jpg" },
                     { id: 1202, name: "Courtney Oluchi", votes: 27, image: "img/courtney.jpeg" },
-                    { id: 1203, name: "Francess", votes: 31, image: "img/francess.jpeg" },
+                    { id: 1203, name: "Francess", votes: 41, image: "img/francess.jpeg" },
                     { id: 1204, name: "Princess Lights", votes: 0, image: "img/princess.jpeg" },
-                    { id: 1205, name: "Treasure", votes: 16, image: "img/treasure.jpeg" }
+                    { id: 1205, name: "Treasure", votes: 21, image: "img/treasure.jpeg" }
                 ]
                 
             },
@@ -193,8 +193,8 @@ const awardData = [
                     { id: 1301, name: "Hamza", votes: 3, image: "img/hamza.jpeg" },
                     { id: 1302, name: "Double G", votes: 0, image: "img/doubleG.jpeg" },
                     { id: 1303, name: "Freddy", votes: 0, image: "img/freddy.jpeg" },
-                    { id: 1304, name: "Classic Clown", votes: 130, image: "img/clown.jpeg" },
-                    { id: 1305, name: "Fortune Oputa", votes: 126, image: "" }
+                    { id: 1304, name: "Classic Clown", votes: 140, image: "img/clown.jpeg" },
+                    { id: 1305, name: "Fortune Oputa", votes: 313, image: "" }
                 ]
                 
             },
