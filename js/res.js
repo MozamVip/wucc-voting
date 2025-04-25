@@ -61,7 +61,7 @@ const awardData = [
                 description: "Recognizing the most athletic student in Computing",
                 type: "individual",
                 nominees: [
-                    { id: 501, name: "Chuks", votes: 17, image: "img/chuks.jpeg" },
+                    { id: 501, name: "Chuks", votes: 37, image: "img/chuks.jpeg" },
                     { id: 502, name: "Blacka", votes: 110, image: "img/blacka.jpeg" },
                     { id: 503, name: "Bright", votes: 108, image: "img/bright.jpeg" },
                     { id: 504, name: "Jay Jay", votes: 0, image: "img/jayjay.jpeg" },
@@ -107,7 +107,7 @@ const awardData = [
                 nominees: [
                     { id: 701, name: "Francess", votes: 112, image: "img/francess.jpeg" },
                     { id: 702, name: "Maya", votes: 0, image: "img/maya.jpeg" },
-                    { id: 703, name: "OY", votes: 0, image: "img/OY.jpeg" },
+                    { id: 703, name: "OY", votes: 43, image: "img/OY.jpeg" },
                     { id: 704, name: "Princess Lights", votes: 0, image: "img/princess.jpeg" },
                     { id: 705, name: "Rachael", votes: 93, image: "img/rachael.jpeg" },
                     { id: 706, name: "Treasure", votes: 4, image: "img/treasure.jpeg" }
@@ -194,7 +194,7 @@ const awardData = [
                     { id: 1302, name: "Double G", votes: 0, image: "img/doubleG.jpeg" },
                     { id: 1303, name: "Freddy", votes: 0, image: "img/freddy.jpeg" },
                     { id: 1304, name: "Classic Clown", votes: 140, image: "img/clown.jpeg" },
-                    { id: 1305, name: "Fortune Oputa", votes: 313, image: "" }
+                    { id: 1305, name: "Fortune Oputa", votes: 329, image: "" }
                 ]
                 
             },
