@@ -105,7 +105,7 @@ const awardData = [
                 description: "Best Dressed Female in Computing",
                 type: "individual",
                 nominees: [
-                    { id: 701, name: "Francess", votes: 112, image: "img/francess.jpeg" },
+                    { id: 701, name: "Francess", votes: 162, image: "img/francess.jpeg" },
                     { id: 702, name: "Maya", votes: 0, image: "img/maya.jpeg" },
                     { id: 703, name: "OY", votes: 58, image: "img/OY.jpeg" },
                     { id: 704, name: "Princess Lights", votes: 0, image: "img/princess.jpeg" },
