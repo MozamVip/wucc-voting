@@ -91,7 +91,7 @@ const awardData = [
                 description: "Best Dressed Male in Computing",
                 type: "individual",
                 nominees: [
-                    { id: 701, name: "Ogatosin", votes: 25, image: "img/ogatosin.jpeg" },
+                    { id: 701, name: "Ogatosin", votes: 325, image: "img/ogatosin.jpeg" },
                     { id: 702, name: "Etinosa Frank", votes: 130, image: "img/Frank.jpeg" },
                     { id: 703, name: "Hassan Bello", votes: 0, image: "img/hassan.jpeg" },
                     { id: 704, name: "AbdulMalik", votes: 0, image: "img/Maleek.jpeg" }
